@@ -33,6 +33,7 @@ defmodule BeaconDemo.MixProject do
   defp deps do
     [
       {:beacon, github: "beaconCMS/beacon"},
+      # {:beacon, path: "../beacon"},
       {:phoenix, "~> 1.7.0-rc.0", override: true},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
