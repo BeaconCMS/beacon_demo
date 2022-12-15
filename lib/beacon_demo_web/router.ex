@@ -14,7 +14,20 @@ defmodule BeaconDemoWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :beacon do
+    plug BeaconWeb.Plug
+  end
+
   scope "/", BeaconDemoWeb do
     pipe_through :browser
+  end
+
+  scope "/", BeaconWeb do
+    pipe_through :browser
+    pipe_through :beacon
+
+    live_session :beacon, session: %{"beacon_site" => "my_site"} do
+      live "/beacon/*path", PageLive, :path
+    end
   end
 end

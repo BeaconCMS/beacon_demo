@@ -8,7 +8,10 @@
 import Config
 
 config :beacon_demo,
-  ecto_repos: [BeaconDemo.Repo]
+  ecto_repos: [BeaconDemo.Repo, Beacon.Repo]
+
+config :beacon,
+  data_source: BeaconDemo.BeaconDataSource
 
 # Configures the endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,
