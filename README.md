@@ -1,19 +1,34 @@
-# BeaconDemo
+# BeaconCMS Demo
 
-To start your Phoenix server:
+Sample application to demo [BeaconCMS](https://beaconcms.org/) features and tips.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+To get started:
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+#### Install dependencies
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+It does require Postgres running and you may change the following
+config in `config/dev.exs` to adjust connection config:
 
-## Learn more
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+```elixir
+config :beacon_demo, BeaconDemo.Repo, ...
+
+config :beacon, Beacon.Repo, ...
+```
+
+#### Setup deps, database, and run the server
+
+_Note that `mix ecto.reset` will delete all the data in those repos._
+
+```bash
+mix do deps.get, ecto.reset
+```
+
+```bash
+mix phx.server
+```
+
+
+#### Demo
+
+Visit http://localhost:4000/beacon/home to see a page built on Beacon or http://localhost:4000/page_management/pages/ to manage existing pages.
