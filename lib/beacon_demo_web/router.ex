@@ -1,6 +1,6 @@
 defmodule BeaconDemoWeb.Router do
   use BeaconDemoWeb, :router
-  require BeaconWeb.PageManagement
+  require BeaconWeb.Admin
   require BeaconWeb.PageManagementApi
 
   pipeline :browser do
@@ -24,6 +24,12 @@ defmodule BeaconDemoWeb.Router do
     pipe_through :browser
   end
 
+  scope "/beacon/admin", BeaconWeb.Admin do
+    pipe_through :browser
+
+    BeaconWeb.Admin.routes()
+  end
+
   scope "/", BeaconWeb do
     pipe_through :browser
     pipe_through :beacon
@@ -31,12 +37,6 @@ defmodule BeaconDemoWeb.Router do
     live_session :beacon, session: %{"beacon_site" => "my_site"} do
       live "/beacon/*path", PageLive, :path
     end
-  end
-
-  scope "/page_management", BeaconWeb.PageManagement do
-    pipe_through :browser
-
-    BeaconWeb.PageManagement.routes()
   end
 
   scope "/page_management_api", BeaconWeb.PageManagementApi do
