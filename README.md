@@ -1,6 +1,6 @@
 # BeaconCMS Demo
 
-Sample application to demo [BeaconCMS](https://beaconcms.org/) features and tips.
+Sample application to demo [beacon](https://github.com/BeaconCMS/beacon) features and tips.
 
 To get started:
 
