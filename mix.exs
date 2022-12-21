@@ -32,8 +32,7 @@ defmodule BeaconDemo.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:beacon, github: "beaconCMS/beacon"},
-      # {:beacon, path: "../beacon"},
+      beacon_path(),
       {:phoenix, "~> 1.7.0-rc.0", override: true},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
@@ -53,6 +52,14 @@ defmodule BeaconDemo.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"}
     ]
+  end
+
+  defp beacon_path do
+    if path = System.get_env("BEACON_PATH") do
+      {:beacon, path: path}
+    else
+      {:beacon, github: "beaconCMS/beacon"}
+    end
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

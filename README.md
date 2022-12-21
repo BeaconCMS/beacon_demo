@@ -16,19 +16,35 @@ config :beacon_demo, BeaconDemo.Repo, ...
 config :beacon, Beacon.Repo, ...
 ```
 
-#### Setup deps, database, and run the server
+#### Setup beacon
+
+By default it will install the latest version of [beacon](https://github.com/BeaconCMS/beacon) but you can use a local checkout for testing and development:
+
+```sh
+git clone git@github.com:BeaconCMS/beacon.git ../beacon
+```
+
+And then define the path to your local copy:
+
+```sh
+export BEACON_PATH=../beacon
+```
+
+#### Setup deps and database
 
 _Note that `mix ecto.reset` will delete all the data in those repos._
 
-```bash
-mix do deps.get, ecto.reset
+```sh
+mix deps.get
+mix ecto.reset
 ```
 
-```bash
+#### Run server
+
+```sh
 mix phx.server
 ```
 
+### Demo
 
-#### Demo
-
-Visit http://localhost:4000/beacon/home to see a page built on Beacon or http://localhost:4000/page_management/pages/ to manage existing pages.
+Visit http://localhost:4000/beacon/home to see a page built on Beacon or http://localhost:4000/beacon/admin/pages/ to manage existing pages.
