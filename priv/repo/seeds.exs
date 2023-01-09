@@ -39,7 +39,7 @@ Components.create_component!(%{
     stylesheet_urls: [],
     body: """
     <header>
-      Header
+      <p class="text-2xl">Header</p>
     </header>
     <%= @inner_content %>
 

@@ -24,7 +24,7 @@ defmodule BeaconDemoWeb.Router do
     pipe_through :browser
   end
 
-  scope "/beacon/admin", BeaconWeb.PageManagement do
+  scope "/beacon/page_management", BeaconWeb.PageManagement do
     pipe_through :browser
 
     BeaconWeb.PageManagement.routes()
