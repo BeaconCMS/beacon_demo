@@ -1,7 +1,6 @@
 defmodule BeaconDemoWeb.Router do
   use BeaconDemoWeb, :router
-  require BeaconWeb.PageManagement
-  require BeaconWeb.PageManagementApi
+  import Beacon.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -16,32 +15,14 @@ defmodule BeaconDemoWeb.Router do
     plug :accepts, ["json"]
   end
 
-  pipeline :beacon do
-    plug BeaconWeb.Plug
-  end
-
-  scope "/", BeaconDemoWeb do
+  scope "/" do
     pipe_through :browser
+    beacon_admin "/beacon/page_management"
+    beacon_site "/beacon", name: "my_site", data_source: BeaconDemo.BeaconDataSource
   end
 
-  scope "/beacon/page_management", BeaconWeb.PageManagement do
-    pipe_through :browser
-
-    BeaconWeb.PageManagement.routes()
-  end
-
-  scope "/", BeaconWeb do
-    pipe_through :browser
-    pipe_through :beacon
-
-    live_session :beacon, session: %{"beacon_site" => "my_site"} do
-      live "/beacon/*path", PageLive, :path
-    end
-  end
-
-  scope "/page_management_api", BeaconWeb.PageManagementApi do
+  scope "/page_management_api" do
     pipe_through :api
-
-    BeaconWeb.PageManagementApi.routes()
+    beacon_api "/"
   end
 end
