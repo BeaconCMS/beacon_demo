@@ -15,10 +15,10 @@ defmodule BeaconDemoWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/" do
+  scope "/beacon" do
     pipe_through :browser
-    beacon_admin "/beacon/page_management"
-    beacon_site "/beacon", name: "my_site", data_source: BeaconDemo.BeaconDataSource
+    beacon_admin "/admin"
+    beacon_site "/", name: "my_site", data_source: BeaconDemo.BeaconDataSource
   end
 
   scope "/page_management_api" do
