@@ -50,4 +50,8 @@ mix phx.server
 
 ### Demo
 
-Visit http://localhost:4000/beacon/home to see a page built on Beacon or http://localhost:4000/beacon/admin/pages to manage existing pages.
+Visit some sample pages:
+
+  * http://localhost:4000/demo/home to see a page with events.
+  * http://localhost:4000/blog/posts/2023-01-sample for a demo of dynamic paths.
+  * http://localhost:4000/admin/pages to manage existing pages.

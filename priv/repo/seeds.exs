@@ -16,13 +16,19 @@ alias Beacon.Layouts
 alias Beacon.Stylesheets
 
 Stylesheets.create_stylesheet!(%{
-  site: "my_site",
+  site: "demo",
+  name: "sample_stylesheet",
+  content: "body {cursor: zoom-in;}"
+})
+
+Stylesheets.create_stylesheet!(%{
+  site: "blog",
   name: "sample_stylesheet",
   content: "body {cursor: zoom-in;}"
 })
 
 Components.create_component!(%{
-  site: "my_site",
+  site: "demo",
   name: "sample_component",
   body: """
   <li>
@@ -31,9 +37,9 @@ Components.create_component!(%{
   """
 })
 
-%{id: layout_id} =
+%{id: demo_layout_id} =
   Layouts.create_layout!(%{
-    site: "my_site",
+    site: "demo",
     title: "Sample Home Page",
     meta_tags: %{"foo" => "bar"},
     stylesheet_urls: [],
@@ -52,8 +58,8 @@ Components.create_component!(%{
 %{id: page_id} =
   Pages.create_page!(%{
     path: "home",
-    site: "my_site",
-    layout_id: layout_id,
+    site: "demo",
+    layout_id: demo_layout_id,
     template: """
     <main>
       <h2>Some Values:</h2>
@@ -74,21 +80,6 @@ Components.create_component!(%{
     """
   })
 
-Pages.create_page!(%{
-  path: "blog/:blog_slug",
-  site: "my_site",
-  layout_id: layout_id,
-  template: """
-  <main>
-    <h2>A blog</h2>
-    <ul>
-      <li>Path Params Blog Slug: <%= @beacon_path_params.blog_slug %></li>
-      <li>Live Data blog_slug_uppercase: <%= @beacon_live_data.blog_slug_uppercase %></li>
-    </ul>
-  </main>
-  """
-})
-
 Pages.create_page_event!(%{
   page_id: page_id,
   event_name: "hello",
@@ -103,5 +94,38 @@ Pages.create_page_helper!(%{
   helper_args: "name",
   code: """
     String.upcase(name)
+  """
+})
+
+%{id: blog_layout_id} =
+  Layouts.create_layout!(%{
+    site: "blog",
+    title: "Sample Blog",
+    meta_tags: %{"foo" => "bar"},
+    stylesheet_urls: [],
+    body: """
+    <header>
+      <p class="text-2xl">Header</p>
+    </header>
+    <%= @inner_content %>
+
+    <footer>
+      Page Footer
+    </footer>
+    """
+  })
+
+Pages.create_page!(%{
+  path: "posts/:post_slug",
+  site: "blog",
+  layout_id: blog_layout_id,
+  template: """
+  <main>
+    <h2>A blog</h2>
+    <ul>
+      <li>Path Params Blog Slug: <%= @beacon_path_params.post_slug %></li>
+      <li>Live Data post_slug_uppercase: <%= @beacon_live_data.post_slug_uppercase %></li>
+    </ul>
+  </main>
   """
 })
