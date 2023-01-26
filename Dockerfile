@@ -52,6 +52,7 @@ COPY lib lib
 COPY assets assets
 
 # compile assets
+RUN mix tailwind.install
 RUN mix assets.deploy
 
 # Compile the release
@@ -87,5 +88,8 @@ ENV MIX_ENV="prod"
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/beacon_demo ./
 
 USER nobody
+
+RUN mkdir -p /app/bin/_build
+COPY --from=builder --chown=nobody:root /app/_build/tailwind-* ./bin/_build/
 
 CMD ["/app/bin/server"]
