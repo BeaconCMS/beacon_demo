@@ -93,3 +93,7 @@ RUN mkdir -p /app/bin/_build
 COPY --from=builder --chown=nobody:root /app/_build/tailwind-* ./bin/_build/
 
 CMD ["/app/bin/server"]
+
+# Appended by flyctl
+ENV ECTO_IPV6 true
+ENV ERL_AFLAGS "-proto_dist inet6_tcp"
