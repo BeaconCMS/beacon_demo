@@ -1,5 +1,9 @@
 name: Deploy to Fly
-on: [push]
+on:
+  push:
+    branches:
+      - main
+      - lp-deployment
 branches:
   - main
   - lp-deployment
