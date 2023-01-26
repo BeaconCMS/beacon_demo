@@ -1,6 +1,4 @@
-# fly.toml file generated for wispy-thunder-4580 on 2023-01-26T13:07:17-05:00
-
-app = "wispy-thunder-4580"
+app = "dy-beacon-demo"
 kill_signal = "SIGTERM"
 kill_timeout = 5
 processes = []
@@ -9,7 +7,7 @@ processes = []
   release_command = "/app/bin/migrate"
 
 [env]
-  PHX_HOST = "wispy-thunder-4580.fly.dev"
+  PHX_HOST = "dy-beacon-demo.fly.dev"
   PORT = "8080"
 
 [experimental]
