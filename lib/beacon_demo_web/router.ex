@@ -17,9 +17,13 @@ defmodule BeaconDemoWeb.Router do
 
   scope "/" do
     pipe_through :browser
-    beacon_admin "/admin"
     beacon_site "/demo", name: "demo", data_source: BeaconDemo.BeaconDataSource
     beacon_site "/blog", name: "blog", data_source: BeaconDemo.BeaconDataSource
+  end
+
+  scope "/admin" do
+    pipe_through :browser
+    beacon_admin "/admin"
   end
 
   scope "/page_management_api" do
