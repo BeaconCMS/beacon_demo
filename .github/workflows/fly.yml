@@ -3,10 +3,9 @@ on:
   push:
     branches:
       - main
-      - lp-deployment
 jobs:
   deploy:
-    name: Deploy proxy
+    name: Deploy app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
