@@ -23,7 +23,7 @@ defmodule BeaconDemoWeb.Router do
 
   scope "/admin" do
     pipe_through :browser
-    beacon_admin "/admin"
+    beacon_admin "/"
   end
 
   scope "/page_management_api" do

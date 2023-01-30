@@ -1,6 +1,6 @@
 # BeaconCMS Demo
 
-Sample application to demo [beacon](https://github.com/BeaconCMS/beacon) features and tips. To get started:
+Sample application to showcase [beacon](https://github.com/BeaconCMS/beacon) features and tips. Follow the readme to get started:
 
 #### Run a database
 
@@ -16,7 +16,7 @@ config :beacon_demo, BeaconDemo.Repo, ...
 config :beacon, Beacon.Repo, ...
 ```
 
-#### Setup beacon (optional)
+#### Local beacon (optional)
 
 By default it will install the latest version of [beacon](https://github.com/BeaconCMS/beacon) but you can use a local checkout for testing and development:
 
@@ -54,4 +54,4 @@ Visit some sample pages:
 
   * http://localhost:4000/demo/home to see a page with events.
   * http://localhost:4000/blog/posts/2023-01-sample for a demo of dynamic paths.
-  * http://localhost:4000/admin/pages to manage existing pages.
+  * http://localhost:4000/admin to manage sites.
