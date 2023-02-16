@@ -1,14 +1,6 @@
-# Script for populating the database. You can run it as:
+# Script for populating sites data. You can run it as:
 #
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     BeaconDemo.Repo.insert!(%BeaconDemo.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+#     mix run priv/repo/beacon_seeds.exs
 
 alias Beacon.Components
 alias Beacon.Pages
