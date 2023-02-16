@@ -32,7 +32,7 @@ export BEACON_PATH=../beacon
 
 #### Change pages (optional)
 
-Layouts and pages are defined in `priv/repo/seeds.exs`. Feel free to change it but remember to run seeds or reset the database.
+Layouts and pages are defined in `priv/repo/beacon_seeds.exs`. Feel free to change it but remember to run seeds or reset the database.
 
 #### Setup
 
