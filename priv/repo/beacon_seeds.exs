@@ -57,7 +57,6 @@ Components.create_component!(%{
 
 %{id: page_id} =
   Pages.create_page!(%{
-    skip_reload: true,
     path: "home",
     site: "demo",
     layout_id: demo_layout_id,
@@ -117,7 +116,6 @@ Pages.create_page_helper!(%{
   })
 
 Pages.create_page!(%{
-  skip_reload: true,
   path: "posts/:post_slug",
   site: "blog",
   layout_id: blog_layout_id,
