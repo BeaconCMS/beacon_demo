@@ -1,6 +1,6 @@
 defmodule BeaconDemoWeb.Router do
   use BeaconDemoWeb, :router
-  import Beacon.Router
+  use Beacon.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
