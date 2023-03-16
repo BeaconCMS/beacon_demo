@@ -1,6 +1,6 @@
 defmodule BeaconDemoWeb.Router do
   use BeaconDemoWeb, :router
-  import Beacon.Router
+  use Beacon.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -17,8 +17,8 @@ defmodule BeaconDemoWeb.Router do
 
   scope "/" do
     pipe_through :browser
-    beacon_site "/demo", name: "demo", data_source: BeaconDemo.BeaconDataSource
-    beacon_site "/blog", name: "blog", data_source: BeaconDemo.BeaconDataSource
+    beacon_site "/demo", site: :demo
+    beacon_site "/blog", site: :blog
   end
 
   scope "/admin" do

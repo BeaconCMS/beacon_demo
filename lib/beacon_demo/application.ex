@@ -16,6 +16,12 @@ defmodule BeaconDemo.Application do
       {Phoenix.PubSub, name: BeaconDemo.PubSub},
       # Start Finch
       {Finch, name: BeaconDemo.Finch},
+      # Start Beacon sites
+      {Beacon,
+       sites: [
+         [site: :demo, data_source: BeaconDemo.BeaconDataSource],
+         [site: :blog, data_source: BeaconDemo.BeaconDataSource]
+       ]},
       # Start the Endpoint (http/https)
       BeaconDemoWeb.Endpoint
       # Start a worker by calling: BeaconDemo.Worker.start_link(arg)

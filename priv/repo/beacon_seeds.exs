@@ -33,7 +33,7 @@ Components.create_component!(%{
   Layouts.create_layout!(%{
     site: "demo",
     title: "Sample Home Page",
-    meta_tags: %{"foo" => "bar"},
+    meta_tags: [%{"description" => "Demo site"}],
     stylesheet_urls: [],
     body: """
     <header>
@@ -61,7 +61,7 @@ Components.create_component!(%{
         <% end %>
       </ul>
 
-      <.form let={f} for={:greeting} phx-submit="hello">
+      <.form let={f} for={%{}} as={:greeting} phx-submit="hello">
         Name: <%= text_input f, :name %> <%= submit "Hello" %>
       </.form>
 
@@ -93,7 +93,7 @@ Pages.create_page_helper!(%{
   Layouts.create_layout!(%{
     site: "blog",
     title: "Sample Blog",
-    meta_tags: %{"foo" => "bar"},
+    meta_tags: [%{"description" => "Demo blog"}],
     stylesheet_urls: [],
     body: """
     <header>
@@ -115,7 +115,7 @@ Pages.create_page!(%{
   <main>
     <h2>A blog</h2>
     <ul>
-      <li>Path Params Blog Slug: <%= @beacon_path_params.post_slug %></li>
+      <li>Path Params Blog Slug: <%= @beacon_path_params["post_slug"] %></li>
       <li>Live Data post_slug_uppercase: <%= @beacon_live_data.post_slug_uppercase %></li>
     </ul>
   </main>
