@@ -5,4 +5,6 @@ defmodule BeaconDemo.BeaconDataSource do
 
   def live_data(:blog, ["posts", post_slug], _params),
     do: %{post_slug_uppercase: String.upcase(post_slug)}
+
+  def live_data(_site, _path, _params), do: %{}
 end
