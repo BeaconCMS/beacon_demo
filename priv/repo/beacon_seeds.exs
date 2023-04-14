@@ -51,7 +51,9 @@ Components.create_component!(%{
   Pages.create_page!(%{
     path: "home",
     site: "demo",
+    status: :published,
     layout_id: demo_layout_id,
+    format: :heex,
     template: """
     <main>
       <h2>Some Values:</h2>
@@ -110,7 +112,9 @@ Pages.create_page_helper!(%{
 Pages.create_page!(%{
   path: "posts/:post_slug",
   site: "blog",
+  status: :published,
   layout_id: blog_layout_id,
+  format: :heex,
   template: """
   <main>
     <h2>A blog</h2>
