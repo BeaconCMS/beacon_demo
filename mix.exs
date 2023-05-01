@@ -58,7 +58,7 @@ defmodule BeaconDemo.MixProject do
     if path = System.get_env("BEACON_PATH") do
       {:beacon, path: path}
     else
-      {:beacon, github: "beaconCMS/beacon"}
+      {:beacon, github: "beaconCMS/beacon", ref: "7e693429eca4580423eb128a9c3c1ddb144d5944"}
     end
   end
 
