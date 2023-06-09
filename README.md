@@ -16,6 +16,10 @@ config :beacon_demo, BeaconDemo.Repo, ...
 config :beacon, Beacon.Repo, ...
 ```
 
+#### Install cmark-gfm
+
+Install [cmark-gfm](https://github.com/github/cmark-gfm) which is used to convert Markdown templates. This dependency will be replaced soon.
+
 #### Local beacon (optional)
 
 By default it will install the latest version of [beacon](https://github.com/BeaconCMS/beacon) but you can use a local checkout for testing and development:
