@@ -2,24 +2,17 @@
 #
 #     mix run priv/repo/beacon_seeds.exs
 
-alias Beacon.Components
-alias Beacon.Pages
-alias Beacon.Layouts
-alias Beacon.Stylesheets
+alias Beacon.Content
 
-Stylesheets.create_stylesheet!(%{
+# Demo site
+
+Content.create_stylesheet!(%{
   site: "demo",
   name: "sample_stylesheet",
   content: "body {cursor: zoom-in;}"
 })
 
-Stylesheets.create_stylesheet!(%{
-  site: "blog",
-  name: "sample_stylesheet",
-  content: "body {cursor: zoom-in;}"
-})
-
-Components.create_component!(%{
+Content.create_component!(%{
   site: "demo",
   name: "sample_component",
   body: """
@@ -29,15 +22,15 @@ Components.create_component!(%{
   """
 })
 
-%{id: demo_layout_id} =
-  Layouts.create_layout!(%{
+layout =
+  Content.create_layout!(%{
     site: "demo",
     title: "Sample Home Page",
     meta_tags: [%{"description" => "Demo site"}],
     stylesheet_urls: [],
     body: """
     <header>
-      <p class="text-2xl">Header</p>
+      <p class="text-2xl text-red-500">Header</p>
     </header>
     <%= @inner_content %>
 
@@ -47,59 +40,71 @@ Components.create_component!(%{
     """
   })
 
-%{id: page_id} =
-  Pages.create_page!(%{
-    path: "home",
-    site: "demo",
-    status: :published,
-    layout_id: demo_layout_id,
-    format: :heex,
-    template: """
-    <main>
-      <h2>Some Values:</h2>
-      <ul>
-        <%= for val <- @beacon_live_data[:vals] do %>
-          <%= my_component("sample_component", val: val) %>
-        <% end %>
-      </ul>
+Content.publish_layout(layout)
 
-      <.form let={f} for={%{}} as={:greeting} phx-submit="hello">
-        Name: <%= text_input f, :name %> <%= submit "Hello" %>
-      </.form>
+%{
+  site: "demo",
+  layout_id: layout.id,
+  path: "home",
+  title: "My Home Page",
+  template: """
+  <main>
+    <h2>Some Values:</h2>
+    <ul>
+      <%= for val <- @beacon_live_data[:vals] do %>
+        <%= my_component("sample_component", val: val) %>
+      <% end %>
+    </ul>
 
-      <%= if assigns[:message], do: assigns.message %>
+    <.simple_form :let={f} for={%{}} as={:greeting} phx-submit="hello">
+      <.input field={f[:name]} />
+      <.button>Submit</.button>
+    </.simple_form>
 
-      <%= dynamic_helper("upcase", "Beacon") %>
-    </main>
-    """
-  })
+    <%= if assigns[:message], do: assigns.message %>
 
-Pages.create_page_event!(%{
-  page_id: page_id,
-  event_name: "hello",
-  code: """
-    {:noreply, assign(socket, :message, "Hello \#{event_params["greeting"]["name"]}!")}
-  """
+    <%= dynamic_helper("upcase", "Beacon") %>
+  </main>
+  """,
+  events: [
+    %{
+      name: "hello",
+      code: """
+        {:noreply, assign(socket, :message, "Hello \#{event_params["greeting"]["name"]}!")}
+      """
+    }
+  ],
+  helpers: [
+    %{
+      name: "upcase",
+      args: "name",
+      code: """
+        String.upcase(name)
+      """
+    }
+  ]
+}
+|> Content.create_page!()
+|> Content.publish_page()
+
+# Blog site
+
+Content.create_stylesheet!(%{
+  site: "blog",
+  name: "sample_stylesheet",
+  content: "body {cursor: zoom-in;}"
 })
 
-Pages.create_page_helper!(%{
-  page_id: page_id,
-  helper_name: "upcase",
-  helper_args: "name",
-  code: """
-    String.upcase(name)
-  """
-})
 
-%{id: blog_layout_id} =
-  Layouts.create_layout!(%{
+layout =
+  Content.create_layout!(%{
     site: "blog",
     title: "Sample Blog",
     meta_tags: [%{"description" => "Demo blog"}],
     stylesheet_urls: [],
     body: """
     <header>
-      <p class="text-2xl">Header</p>
+      <p class="text-2xl text-red-500">Header</p>
     </header>
     <%= @inner_content %>
 
@@ -109,12 +114,13 @@ Pages.create_page_helper!(%{
     """
   })
 
-Pages.create_page!(%{
-  path: "posts/:post_slug",
+Content.publish_layout(layout)
+
+%{
   site: "blog",
-  status: :published,
-  layout_id: blog_layout_id,
-  format: :heex,
+  layout_id: layout.id,
+  path: "posts/:post_slug",
+  title: "Post",
   template: """
   <main>
     <h2>A blog</h2>
@@ -124,4 +130,6 @@ Pages.create_page!(%{
     </ul>
   </main>
   """
-})
+}
+|> Content.create_page!()
+|> Content.publish_page()

@@ -1,6 +1,7 @@
 defmodule BeaconDemoWeb.Router do
   use BeaconDemoWeb, :router
   use Beacon.Router
+  use Beacon.LiveAdmin.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -9,6 +10,7 @@ defmodule BeaconDemoWeb.Router do
     plug :put_root_layout, {BeaconDemoWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Beacon.LiveAdmin.Plug
   end
 
   pipeline :api do
@@ -23,7 +25,7 @@ defmodule BeaconDemoWeb.Router do
 
   scope "/admin" do
     pipe_through :browser
-    beacon_admin "/"
+    beacon_live_admin "/"
   end
 
   scope "/page_management_api" do
