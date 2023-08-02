@@ -32,16 +32,17 @@ defmodule BeaconDemo.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      beacon_path(),
+      beacon_dep(),
+      beacon_live_admin_dep(),
       {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, "~> 0.17"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.18"},
+      {:phoenix_live_view, "~> 0.19"},
       {:heroicons, "~> 0.5"},
-      {:floki, ">= 0.30.0", only: :test},
+      {:floki, ">= 0.30.0"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
@@ -54,11 +55,19 @@ defmodule BeaconDemo.MixProject do
     ]
   end
 
-  defp beacon_path do
+  defp beacon_dep do
     if path = System.get_env("BEACON_PATH") do
-      {:beacon, path: path}
+      {:beacon, path: path, override: true}
     else
-      {:beacon, github: "beaconCMS/beacon", ref: "7e693429eca4580423eb128a9c3c1ddb144d5944"}
+      {:beacon, github: "BeaconCMS/beacon", ref: "ab6dbc8894462bdb313d633488273e62e1b13bda", override: true}
+    end
+  end
+
+  defp beacon_live_admin_dep do
+    if path = System.get_env("BEACON_LIVE_ADMIN_PATH") do
+      {:beacon_live_admin, path: path}
+    else
+      {:beacon_live_admin, github: "BeaconCMS/beacon_live_admin", ref: "451da443727e782ced0ae876e5516c7f480d217c"}
     end
   end
 

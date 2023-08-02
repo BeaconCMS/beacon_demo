@@ -1,6 +1,6 @@
 # BeaconCMS Demo
 
-Sample application to showcase [beacon](https://github.com/BeaconCMS/beacon) features and tips. Follow the readme to get started:
+Sample application to showcase [beacon](https://github.com/BeaconCMS/beacon) features. Follow the readme to get started:
 
 #### Run a database
 
@@ -16,27 +16,15 @@ config :beacon_demo, BeaconDemo.Repo, ...
 config :beacon, Beacon.Repo, ...
 ```
 
-#### Install cmark-gfm
+#### Install dependencies
 
-Install [cmark-gfm](https://github.com/github/cmark-gfm) which is used to convert Markdown templates. This dependency will be replaced soon.
+1. Install [cmark-gfm](https://github.com/github/cmark-gfm) which is used to convert Markdown templates. This dependency will be replaced eventually.
 
-#### Local beacon (optional)
+2. Beacon depends on C libraries. If deps compilation fails, make sure your environment has the compilers installed. On Ubuntu look for the `build_essential` package, on macOS install utilities with `xcode-select --install`.
 
-By default it will install the latest version of [beacon](https://github.com/BeaconCMS/beacon) but you can use a local checkout for testing and development:
+#### Change seeds data (optional)
 
-```sh
-git clone git@github.com:BeaconCMS/beacon.git ../beacon
-```
-
-And then define the path to your local copy:
-
-```sh
-export BEACON_PATH=../beacon
-```
-
-#### Change pages (optional)
-
-Layouts and pages are defined in `priv/repo/beacon_seeds.exs`. Feel free to change it but remember to run seeds or reset the database.
+Layouts and pages are defined in `priv/repo/beacon_seeds.exs`. Feel free to change it but remember to reset the database: `mix ecto.reset`
 
 #### Setup
 
@@ -56,9 +44,9 @@ mix phx.server
 
 Visit some sample pages:
 
-  * http://localhost:4000/demo/home to see a page with events.
-  * http://localhost:4000/blog/posts/2023-01-sample for a demo of dynamic paths.
-  * http://localhost:4000/admin to manage sites.
+  * [http://localhost:4000/demo/home](http://localhost:4000/demo/home) to see a page with events.
+  * [http://localhost:4000/blog/posts/2023-01-sample](http://localhost:4000/blog/posts/2023-01-sample) for a demo of dynamic paths.
+  * [http://localhost:4000/admin](http://localhost:4000/admin) to manage sites.
 
 ### Exploring
 
