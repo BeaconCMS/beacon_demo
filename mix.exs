@@ -59,7 +59,7 @@ defmodule BeaconDemo.MixProject do
     if path = System.get_env("BEACON_PATH") do
       {:beacon, path: path, override: true}
     else
-      {:beacon, github: "BeaconCMS/beacon", ref: "ab6dbc8894462bdb313d633488273e62e1b13bda", override: true}
+      {:beacon, github: "BeaconCMS/beacon", ref: "544ca030a8ea804607bcff93dfba81e475165429", override: true}
     end
   end
 
@@ -80,7 +80,7 @@ defmodule BeaconDemo.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "assets.setup", "ecto.setup"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
+      "assets.setup": ["tailwind.install", "esbuild.install"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/beacon_seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
