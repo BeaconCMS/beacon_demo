@@ -28,7 +28,7 @@ layout =
     title: "Sample Home Page",
     meta_tags: [%{"description" => "Demo site"}],
     stylesheet_urls: [],
-    body: """
+    template: """
     <header>
       <p class="text-2xl text-red-500">Header</p>
     </header>
@@ -42,7 +42,7 @@ layout =
 
 Content.publish_layout(layout)
 
-%{
+page = Content.create_page!(%{
   site: "demo",
   layout_id: layout.id,
   path: "home",
@@ -66,14 +66,6 @@ Content.publish_layout(layout)
     <%= dynamic_helper("upcase", "Beacon") %>
   </main>
   """,
-  events: [
-    %{
-      name: "hello",
-      code: """
-        {:noreply, assign(socket, :message, "Hello \#{event_params["greeting"]["name"]}!")}
-      """
-    }
-  ],
   helpers: [
     %{
       name: "upcase",
@@ -83,9 +75,17 @@ Content.publish_layout(layout)
       """
     }
   ]
-}
-|> Content.create_page!()
-|> Content.publish_page()
+})
+
+
+Content.create_event_handler_for_page(page, %{
+  name: "hello",
+  code: """
+    {:noreply, assign(socket, :message, "Hello \#{event_params["greeting"]["name"]}!")}
+  """
+})
+
+Content.publish_page(page)
 
 # Blog site
 
@@ -102,7 +102,7 @@ layout =
     title: "Sample Blog",
     meta_tags: [%{"description" => "Demo blog"}],
     stylesheet_urls: [],
-    body: """
+    template: """
     <header>
       <p class="text-2xl text-red-500">Header</p>
     </header>
