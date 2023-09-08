@@ -51,7 +51,8 @@ defmodule BeaconDemo.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:live_monaco_editor, "~> 0.1.4"}
     ]
   end
 
@@ -60,7 +61,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon, path: path, override: true}
     else
       {:beacon,
-       github: "BeaconCMS/beacon", ref: "952486eba3509c8eef836e9c96eb91813098a308", override: true}
+       github: "BeaconCMS/beacon", ref: "8930fe5370dd030671c61d2f1826ee97726eea24", override: true}
     end
   end
 
@@ -69,7 +70,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon_live_admin, path: path}
     else
       {:beacon_live_admin,
-       github: "BeaconCMS/beacon_live_admin", ref: "22ee59452832fcbf19beaef5980d4c322f4b8624"}
+       github: "BeaconCMS/beacon_live_admin", ref: "cad9b4733f8bd1128cc035a59b74687fb58b99cb"}
     end
   end
 
@@ -82,7 +83,7 @@ defmodule BeaconDemo.MixProject do
   defp aliases do
     [
       setup: ["deps.get", "assets.setup", "ecto.setup"],
-      "assets.setup": ["tailwind.install", "esbuild.install"],
+      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/beacon_seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],

@@ -56,13 +56,6 @@ page = Content.create_page!(%{
       <% end %>
     </ul>
 
-    <.simple_form :let={f} for={%{}} as={:greeting} phx-submit="hello">
-      <.input field={f[:name]} />
-      <.button>Submit</.button>
-    </.simple_form>
-
-    <%= if assigns[:message], do: assigns.message %>
-
     <%= dynamic_helper("upcase", "Beacon") %>
   </main>
   """,
