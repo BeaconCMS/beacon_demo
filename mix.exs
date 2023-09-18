@@ -52,7 +52,7 @@ defmodule BeaconDemo.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:live_monaco_editor, "~> 0.1.4"}
+      {:live_monaco_editor, "~> 0.1"}
     ]
   end
 
@@ -61,7 +61,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon, path: path, override: true}
     else
       {:beacon,
-       github: "BeaconCMS/beacon", ref: "8930fe5370dd030671c61d2f1826ee97726eea24", override: true}
+       github: "BeaconCMS/beacon", ref: "86c0fb19f51c13f0861279398ad3341060ca0697", override: true}
     end
   end
 
@@ -70,7 +70,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon_live_admin, path: path}
     else
       {:beacon_live_admin,
-       github: "BeaconCMS/beacon_live_admin", ref: "cad9b4733f8bd1128cc035a59b74687fb58b99cb"}
+       github: "BeaconCMS/beacon_live_admin", ref: "94e7a659ad11b3c0249c046b9de370183c5fbe89"}
     end
   end
 
