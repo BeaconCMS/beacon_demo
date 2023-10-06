@@ -17,10 +17,7 @@ config :beacon, Beacon.Repo, ...
 ```
 
 #### Install dependencies
-
-1. Install [cmark-gfm](https://github.com/github/cmark-gfm) which is used to convert Markdown templates. This dependency will be replaced eventually.
-
-2. Beacon depends on C libraries. If deps compilation fails, make sure your environment has the compilers installed. On Ubuntu look for the `build_essential` package, on macOS install utilities with `xcode-select --install`.
+Beacon depends on C libraries. If deps compilation fails, make sure your environment has the compilers installed. On Ubuntu look for the `build_essential` package, on macOS install utilities with `xcode-select --install`.
 
 #### Change seeds data (optional)
 
