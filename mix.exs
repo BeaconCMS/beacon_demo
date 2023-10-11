@@ -61,7 +61,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon, path: path, override: true}
     else
       {:beacon,
-       github: "BeaconCMS/beacon", ref: "884fbf717eefc0c9fb51cbc795410e453fa50e17", override: true}
+       github: "BeaconCMS/beacon", ref: "1d8d2fd636a40c107d47d0a87869930fdd0f82d0", override: true}
     end
   end
 
@@ -70,7 +70,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon_live_admin, path: path}
     else
       {:beacon_live_admin,
-       github: "BeaconCMS/beacon_live_admin", ref: "12e9006c576f7e2d6d4aadf1d8dbcc08dda7af8c"}
+       github: "BeaconCMS/beacon_live_admin", ref: "778e5aff844de7533685cbf9a429d3bef7595349"}
     end
   end
 
