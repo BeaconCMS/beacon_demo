@@ -45,7 +45,7 @@ Content.publish_layout(layout)
 page = Content.create_page!(%{
   site: "demo",
   layout_id: layout.id,
-  path: "home",
+  path: "/",
   title: "My Home Page",
   template: """
   <main>
@@ -70,13 +70,15 @@ page = Content.create_page!(%{
   ]
 })
 
-
 Content.create_event_handler_for_page(page, %{
   name: "hello",
   code: """
     {:noreply, assign(socket, :message, "Hello \#{event_params["greeting"]["name"]}!")}
   """
 })
+
+{:ok, live_data} = Content.create_live_data(%{site: "demo", path: "/"})
+Content.create_assign_for_live_data(live_data, %{format: :elixir, key: "vals", value: ~s|["first", "second", "third"]|})
 
 Content.publish_page(page)
 
@@ -112,7 +114,7 @@ Content.publish_layout(layout)
 %{
   site: "blog",
   layout_id: layout.id,
-  path: "posts/:post_slug",
+  path: "/posts/:post_slug",
   title: "Post",
   template: """
   <main>
@@ -126,3 +128,6 @@ Content.publish_layout(layout)
 }
 |> Content.create_page!()
 |> Content.publish_page()
+
+{:ok, live_data} = Content.create_live_data(%{site: "blog", path: "/posts/:post_slug"})
+Content.create_assign_for_live_data(live_data, %{format: :elixir, key: "post_slug_uppercase", value: ~s|String.upcase(post_slug)|})

@@ -41,7 +41,7 @@ mix phx.server
 
 Visit some sample pages:
 
-  * [http://localhost:4000/demo/home](http://localhost:4000/demo/home) to see a page with events.
+  * [http://localhost:4000/demo/home](http://localhost:4000/demo/) to see a page with live data.
   * [http://localhost:4000/blog/posts/2023-01-sample](http://localhost:4000/blog/posts/2023-01-sample) for a demo of dynamic paths.
   * [http://localhost:4000/admin](http://localhost:4000/admin) to manage sites.
 
