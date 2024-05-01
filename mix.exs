@@ -37,12 +37,18 @@ defmodule BeaconDemo.MixProject do
       {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
-      {:postgrex, "~> 0.17"},
-      {:phoenix_html, "~> 3.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, "~> 4.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.19"},
-      {:heroicons, "~> 0.5"},
-      {:floki, ">= 0.30.0"},
+      {:heroicons,
+       github: "tailwindlabs/heroicons",
+       tag: "v2.1.1",
+       sparse: "optimized",
+       app: false,
+       compile: false,
+       depth: 1},
+      {:floki, ">= 0.30.0", only: :test},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
@@ -61,7 +67,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon, path: path, override: true}
     else
       {:beacon,
-       github: "BeaconCMS/beacon", ref: "1d8d2fd636a40c107d47d0a87869930fdd0f82d0", override: true}
+       github: "BeaconCMS/beacon", ref: "1ac76aa8941db6ff5b86ff65c6c1c4eb60d8cd43", override: true}
     end
   end
 
@@ -70,7 +76,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon_live_admin, path: path}
     else
       {:beacon_live_admin,
-       github: "BeaconCMS/beacon_live_admin", ref: "778e5aff844de7533685cbf9a429d3bef7595349"}
+       github: "BeaconCMS/beacon_live_admin", ref: "dbba2d191a16cf0545fba57511d1df7a07582dec"}
     end
   end
 

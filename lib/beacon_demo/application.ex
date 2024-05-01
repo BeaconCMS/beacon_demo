@@ -19,12 +19,8 @@ defmodule BeaconDemo.Application do
       # Start Beacon sites
       {Beacon,
        sites: [
-         [
-           site: :demo,
-           data_source: BeaconDemo.BeaconDataSource,
-           endpoint: BeaconDemoWeb.Endpoint
-         ],
-         [site: :blog, data_source: BeaconDemo.BeaconDataSource, endpoint: BeaconDemoWeb.Endpoint]
+         [site: :demo, endpoint: BeaconDemoWeb.Endpoint],
+         [site: :blog, endpoint: BeaconDemoWeb.Endpoint]
        ]},
       # Start the Endpoint (http/https)
       BeaconDemoWeb.Endpoint
