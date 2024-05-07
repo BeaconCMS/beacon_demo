@@ -22,6 +22,7 @@ defmodule BeaconDemo.Application do
          [
            site: :demo,
            endpoint: BeaconDemoWeb.Endpoint,
+           tailwind_config: Path.join(Application.app_dir(:beacon_demo, "priv"), "beacon.tailwind.config.js.eex"),
            extra_page_fields: [
              BeaconDemo.Beacon.PageFields.Type
            ]
