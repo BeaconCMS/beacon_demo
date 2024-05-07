@@ -19,7 +19,13 @@ defmodule BeaconDemo.Application do
       # Start Beacon sites
       {Beacon,
        sites: [
-         [site: :demo, endpoint: BeaconDemoWeb.Endpoint]
+         [
+           site: :demo,
+           endpoint: BeaconDemoWeb.Endpoint,
+           extra_page_fields: [
+             BeaconDemo.Beacon.PageFields.Type
+           ]
+         ]
        ]},
       # Start the Endpoint (http/https)
       BeaconDemoWeb.Endpoint

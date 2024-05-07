@@ -2,7 +2,7 @@
   <div class="absolute inset-0 z-[-1] bg-cover bg-center opacity-30 blur-[100px]"></div>
   <header class="container mx-auto flex items-center justify-between py-6 px-4 md:px-6">
     <div class="flex items-center gap-2">
-      <a class="flex items-center gap-2" href="#">
+      <.link patch="/" class="flex items-center gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -19,12 +19,12 @@
           <line x1="4" x2="4" y1="22" y2="15"></line>
         </svg>
         <span class="text-2xl font-bold">CMS Platform</span>
-      </a>
+      </.link>
     </div>
     <div class="flex items-center gap-4">
-      <a class="hidden md:inline-flex text-sm font-medium hover:underline" href="/">
+      <.link patch="/blog" class="hidden md:inline-flex text-sm font-medium hover:underline">
         Blog
-      </a>
+      </.link>
       <button class="items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 hidden md:inline-flex">
         Sign In
       </button>
@@ -43,7 +43,7 @@
           <p class="text-lg text-gray-300 md:text-xl">
             Streamline your content management with our intuitive, high-performance CMS built on Phoenix LiveView.
           </p>
-          <Phoenix.Component.form :let={f} for={:waitlist} phx-submit="join">
+          <Phoenix.Component.form :let={f} for={%{}} as={:waitlist} phx-submit="join">
             <div class="flex w-full max-w-2xl items-center space-x-2">
               <input
                 id={Phoenix.HTML.Form.input_id(f, :email)}
