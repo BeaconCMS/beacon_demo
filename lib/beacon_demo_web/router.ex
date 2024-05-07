@@ -10,6 +10,9 @@ defmodule BeaconDemoWeb.Router do
     plug :put_root_layout, {BeaconDemoWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+  end
+
+  pipeline :beacon_admin do
     plug Beacon.LiveAdmin.Plug
   end
 
@@ -17,19 +20,13 @@ defmodule BeaconDemoWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/" do
-    pipe_through :browser
-    beacon_site "/demo", site: :demo
-    beacon_site "/blog", site: :blog
-  end
-
   scope "/admin" do
-    pipe_through :browser
+    pipe_through [:browser, :beacon_admin]
     beacon_live_admin "/"
   end
 
-  scope "/page_management_api" do
-    pipe_through :api
-    beacon_api "/"
+  scope "/" do
+    pipe_through :browser
+    beacon_site "/", site: :demo
   end
 end
