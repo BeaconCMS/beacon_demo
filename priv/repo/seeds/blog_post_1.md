@@ -19,6 +19,7 @@ defmodule MyAppWeb.PageController do
 
   def index(conn, _params) do
     render(conn, "index.html", message: "Welcome to Elixir!")
+  end
 ```
 
 ## The Future of Elixir in Web Development

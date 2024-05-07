@@ -25,11 +25,10 @@ default_layout = Content.get_layout_by(:demo, title: "Default")
 
 # -- HOME PAGE
 
-home_page =
-  Content.create_page!(%{
-    site: "demo",
-    layout_id: default_layout.id,
-    path: "/",
+home_page = Content.get_page_by(:demo, path: "/")
+
+{:ok, home_page} =
+  Content.update_page(home_page, %{
     title: "CMS Platform",
     template: template.("home.html.heex"),
     meta_tags: [
