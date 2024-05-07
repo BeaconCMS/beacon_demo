@@ -60,6 +60,9 @@
               </button>
             </div>
           </Phoenix.Component.form>
+          <span :if={Map.get(assigns, :joined)} class="text-sm text-gray-300">
+            Congrats! You joined the watchlist.
+          </span>
         </div>
         <div class="flex items-center justify-center">
           <img

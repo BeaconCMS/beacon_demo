@@ -62,7 +62,7 @@ Content.create_event_handler_for_page(home_page, %{
   code: ~S"""
   %{"waitlist" => %{"email" => email}} = event_params
   IO.puts("#{email} joined the waitlist")
-  {:noreply, socket}
+  {:noreply, assign(socket, :joined, true)}
   """
 })
 
