@@ -19,8 +19,14 @@ defmodule BeaconDemo.Application do
       # Start Beacon sites
       {Beacon,
        sites: [
-         [site: :demo, endpoint: BeaconDemoWeb.Endpoint],
-         [site: :blog, endpoint: BeaconDemoWeb.Endpoint]
+         [
+           site: :demo,
+           endpoint: BeaconDemoWeb.Endpoint,
+           tailwind_config: Path.join(Application.app_dir(:beacon_demo, "priv"), "beacon.tailwind.config.js.eex"),
+           extra_page_fields: [
+             BeaconDemo.Beacon.PageFields.Type
+           ]
+         ]
        ]},
       # Start the Endpoint (http/https)
       BeaconDemoWeb.Endpoint
