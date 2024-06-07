@@ -48,7 +48,7 @@ defmodule BeaconDemo.MixProject do
        app: false,
        compile: false,
        depth: 1},
-      {:floki, ">= 0.30.0", only: :test},
+      {:floki, ">= 0.30.0"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
@@ -67,7 +67,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon, path: path, override: true}
     else
       {:beacon,
-       github: "BeaconCMS/beacon", ref: "17524540ac6a5c38afc7c0ee6fc6228c0b5f488c", override: true}
+       github: "BeaconCMS/beacon", ref: "7fc4c93af4df90365d154e0a76e9efc20d26fb04", override: true}
     end
   end
 
@@ -76,7 +76,7 @@ defmodule BeaconDemo.MixProject do
       {:beacon_live_admin, path: path}
     else
       {:beacon_live_admin,
-       github: "BeaconCMS/beacon_live_admin", ref: "550f6fa2f5abd68b79cd9b7a904d6f49aa196bb5"}
+       github: "BeaconCMS/beacon_live_admin", ref: "90bc659ba834db44014d54a7f03be85345980475"}
     end
   end
 
