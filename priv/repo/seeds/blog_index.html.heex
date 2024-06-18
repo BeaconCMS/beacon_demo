@@ -1,7 +1,7 @@
 <div class="relative min-h-[80vh] w-full overflow-hidden bg-gray-100 dark:bg-gray-900">
   <header class="absolute top-0 left-0 z-30 w-full bg-white/80 backdrop-blur-md dark:bg-gray-900/80">
     <div class="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-      <.link patch="/" class="flex items-center gap-2">
+      <.page_link path={~P"/"} class="flex items-center gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -18,7 +18,7 @@
           <line x1="4" x2="4" y1="22" y2="15"></line>
         </svg>
         <span class="text-2xl font-bold">CMS Platform</span>
-      </.link>
+      </.page_link>
       <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
         Sign In
       </button>
@@ -43,7 +43,7 @@
   <div class="relative z-20 container mx-auto px-4 py-12 md:px-6 md:py-16 lg:py-24">
     <div class="grid gap-8 lg:grid-cols-[2fr_1fr]">
       <div :if={@beacon_live_data[:latest_blog_post]}>
-        <.link patch={@beacon_live_data[:latest_blog_post].path}>
+        <.page_link path={@beacon_live_data[:latest_blog_post].path}>
           <img
             src="https://placehold.co/800x500"
             alt="Blog Post Cover"
@@ -51,12 +51,12 @@
             height="500"
             class="aspect-[16/9] w-full rounded-lg object-cover"
           />
-        </.link>
+        </.page_link>
         <div class="mt-8 space-y-4">
           <h1 class="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            <.link patch={@beacon_live_data[:latest_blog_post].path}>
+            <.page_link path={@beacon_live_data[:latest_blog_post].path}>
               <%= @beacon_live_data[:latest_blog_post].title %>
-            </.link>
+            </.page_link>
           </h1>
         </div>
       </div>
@@ -65,8 +65,8 @@
           <h2 class="text-xl font-bold">Recent Posts</h2>
           <div class="mt-4 space-y-4">
             <%= for post <- @beacon_live_data[:recent_blog_posts] do %>
-              <.link
-                patch={post.path}
+              <.page_link
+                path={post.path}
                 class="flex items-center space-x-4 text-gray-700 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
               >
                 <div class="flex-shrink-0">
@@ -87,7 +87,7 @@
                     <%= Calendar.strftime(post.updated_at, "%Y-%m-%d") %>
                   </p>
                 </div>
-              </.link>
+              </.page_link>
             <% end %>
           </div>
         </div>
