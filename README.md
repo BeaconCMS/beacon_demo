@@ -12,8 +12,6 @@ In `config/dev.exs` adjust the following repo config to fit your local environme
 
 ```elixir
 config :beacon_demo, BeaconDemo.Repo, ...
-
-config :beacon, Beacon.Repo, ...
 ```
 
 #### Setup
