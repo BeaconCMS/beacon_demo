@@ -38,14 +38,14 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ],
   tailwind_config: [
-    args: ~w(tailwind.config.js --bundle --platform=node --outfile=../priv/static/assets/tailwind.config.bundle.js),
+    args: ~w(tailwind.config.js --bundle --format=esm --target=es2020 --outfile=../priv/tailwind.config.bundle.js),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
 # Configure tailwind (the version is required)
 config :tailwind,
-  version: "3.1.8",
+  version: "3.4.4",
   default: [
     args: ~w(
       --config=tailwind.config.js
