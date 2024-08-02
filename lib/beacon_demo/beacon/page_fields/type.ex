@@ -4,7 +4,7 @@ defmodule BeaconDemo.Beacon.PageFields.Type do
 
   use Phoenix.Component
 
-  import BeaconWeb.CoreComponents
+  import Beacon.Web.CoreComponents
   import Ecto.Changeset
 
   @impl true
