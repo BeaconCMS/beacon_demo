@@ -68,7 +68,7 @@ defmodule BeaconDemo.MixProject do
     if path = System.get_env("BEACON_LIVE_ADMIN_PATH") do
       {:beacon_live_admin, path: path}
     else
-      {:beacon_live_admin, github: "BeaconCMS/beacon_live_admin", ref: "fd3f799"}
+      {:beacon_live_admin, "~> 0.1.0-rc.0"}
     end
   end
 
