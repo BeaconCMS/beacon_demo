@@ -60,7 +60,7 @@ defmodule BeaconDemo.MixProject do
     if path = System.get_env("BEACON_PATH") do
       {:beacon, path: path, override: true}
     else
-      {:beacon, "~> 0.1.0-rc.0", override: true}
+      {:beacon, "~> 0.1.0-rc.1", override: true}
     end
   end
 
@@ -68,7 +68,7 @@ defmodule BeaconDemo.MixProject do
     if path = System.get_env("BEACON_LIVE_ADMIN_PATH") do
       {:beacon_live_admin, path: path}
     else
-      {:beacon_live_admin, "~> 0.1.0-rc.0"}
+      {:beacon_live_admin, "~> 0.1.0-rc.1"}
     end
   end
 

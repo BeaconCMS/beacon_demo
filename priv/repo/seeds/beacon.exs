@@ -56,7 +56,8 @@ Beacon.MediaLibrary.UploadMetadata.new(
   """
 })
 
-Content.create_event_handler_for_page(home_page, %{
+Content.create_event_handler(%{
+  site: "demo",
   name: "join",
   code: ~S"""
   %{"waitlist" => %{"email" => email}} = event_params
