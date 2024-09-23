@@ -44,7 +44,7 @@ defmodule BeaconDemoWeb do
         layouts: [html: BeaconDemoWeb.Layouts]
 
       import Plug.Conn
-      import BeaconDemoWeb.Gettext
+      use Gettext, backend: BeaconDemoWeb.Gettext
 
       unquote(verified_routes())
     end
