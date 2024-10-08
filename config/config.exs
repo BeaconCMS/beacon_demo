@@ -13,6 +13,7 @@ config :beacon_demo,
 # Configures the endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,
   url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: BeaconDemoWeb.ErrorHTML, json: BeaconDemoWeb.ErrorJSON],
     layout: false
@@ -37,7 +38,7 @@ config :esbuild,
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ],
-  tailwind_config: [
+  tailwind_bundle: [
     args: ~w(tailwind.config.js --bundle --format=esm --target=es2020 --outfile=../priv/tailwind.config.bundle.js),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}

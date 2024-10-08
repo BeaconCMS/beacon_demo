@@ -1,7 +1,28 @@
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __commonJS = (cb, mod) => function __require() {
   return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 
 // node_modules/tailwindcss/lib/util/createPlugin.js
 var require_createPlugin = __commonJS({
@@ -290,7 +311,7 @@ var require_config_full = __commonJS({
         },
         blur: {
           0: "0",
-          none: "0",
+          none: "",
           sm: "4px",
           DEFAULT: "8px",
           md: "12px",
@@ -1319,7 +1340,7 @@ var require_picocolors_browser = __commonJS({
   "node_modules/picocolors/picocolors.browser.js"(exports, module) {
     var x = String;
     var create = function() {
-      return { isColorSupported: false, reset: x, bold: x, dim: x, italic: x, underline: x, inverse: x, hidden: x, strikethrough: x, black: x, red: x, green: x, yellow: x, blue: x, magenta: x, cyan: x, white: x, gray: x, bgBlack: x, bgRed: x, bgGreen: x, bgYellow: x, bgBlue: x, bgMagenta: x, bgCyan: x, bgWhite: x };
+      return { isColorSupported: false, reset: x, bold: x, dim: x, italic: x, underline: x, inverse: x, hidden: x, strikethrough: x, black: x, red: x, green: x, yellow: x, blue: x, magenta: x, cyan: x, white: x, gray: x, bgBlack: x, bgRed: x, bgGreen: x, bgYellow: x, bgBlue: x, bgMagenta: x, bgCyan: x, bgWhite: x, blackBright: x, redBright: x, greenBright: x, yellowBright: x, blueBright: x, magentaBright: x, cyanBright: x, whiteBright: x, bgBlackBright: x, bgRedBright: x, bgGreenBright: x, bgYellowBright: x, bgBlueBright: x, bgMagentaBright: x, bgCyanBright: x, bgWhiteBright: x };
     };
     module.exports = create();
     module.exports.createColors = create;
@@ -1776,6 +1797,13 @@ var require_src = __commonJS({
     }
     var forms = plugin2.withOptions(function(options = { strategy: void 0 }) {
       return function({ addBase, addComponents, theme }) {
+        function resolveChevronColor(color, fallback) {
+          let resolved = theme(color);
+          if (!resolved || resolved.includes("var(")) {
+            return fallback;
+          }
+          return resolved.replace("<alpha-value>", "1");
+        }
         const strategy = options.strategy === void 0 ? ["base", "class"] : [options.strategy];
         const rules = [
           {
@@ -1917,9 +1945,9 @@ var require_src = __commonJS({
             class: [".form-select"],
             styles: {
               "background-image": `url("${svgToDataUri(
-                `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${resolveColor(
-                  theme("colors.gray.500", colors.gray[500]),
-                  "--tw-stroke-opacity"
+                `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${resolveChevronColor(
+                  "colors.gray.500",
+                  colors.gray[500]
                 )}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`
               )}")`,
               "background-position": `right ${spacing[2]} center`,
@@ -4411,7 +4439,6 @@ var require_styles = __commonJS({
             table: {
               width: "100%",
               tableLayout: "auto",
-              textAlign: "start",
               marginTop: em(32, 16),
               marginBottom: em(32, 16)
             },
@@ -4440,6 +4467,9 @@ var require_styles = __commonJS({
             },
             "tfoot td": {
               verticalAlign: "top"
+            },
+            "th, td": {
+              textAlign: "start"
             },
             "figure > *": {},
             // Required to maintain correct order when merging
@@ -8222,7 +8252,7 @@ var require_src2 = __commonJS({
 });
 
 // tailwind.config.js
-var plugin = require_plugin();
+var import_plugin = __toESM(require_plugin());
 var tailwind_config_default = {
   content: [
     "./js/**/*.js",
@@ -8244,9 +8274,9 @@ var tailwind_config_default = {
     //
     //     <div class="phx-click-loading:animate-ping">
     //
-    plugin(({ addVariant }) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
-    plugin(({ addVariant }) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),
-    plugin(({ addVariant }) => addVariant("phx-change-loading", [".phx-change-loading&", ".phx-change-loading &"]))
+    (0, import_plugin.default)(({ addVariant }) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
+    (0, import_plugin.default)(({ addVariant }) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),
+    (0, import_plugin.default)(({ addVariant }) => addVariant("phx-change-loading", [".phx-change-loading&", ".phx-change-loading &"]))
   ]
 };
 export {
