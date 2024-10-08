@@ -34,6 +34,7 @@ defmodule BeaconDemo.MixProject do
     [
       beacon_dep(),
       beacon_live_admin_dep(),
+      {:bandit, "~> 1.5"},
       {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
@@ -51,7 +52,6 @@ defmodule BeaconDemo.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"},
       {:live_monaco_editor, "~> 0.1"}
     ]
   end

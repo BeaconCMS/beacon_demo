@@ -13,6 +13,7 @@ config :beacon_demo,
 # Configures the endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,
   url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
   render_errors: [
     formats: [html: BeaconDemoWeb.ErrorHTML, json: BeaconDemoWeb.ErrorJSON],
     layout: false
