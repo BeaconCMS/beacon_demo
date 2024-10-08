@@ -7,13 +7,13 @@
 # This file is based on these images:
 #
 #   - https://hub.docker.com/r/hexpm/elixir/tags - for the build image
-#   - https://hub.docker.com/_/debian?tab=tags&page=1&name=bullseye-20221004-slim - for the release image
+#   - https://hub.docker.com/_/debian?tab=tags&page=1&name=bullseye-20240701-slim - for the release image
 #   - https://pkgs.org/ - resource for finding needed packages
-#   - Ex: hexpm/elixir:1.14.0-erlang-25.2-debian-bullseye-20221004-slim
+#   - Ex: hexpm/elixir:1.17.2-erlang-27.0-debian-bullseye-20240701-slim
 #
-ARG ELIXIR_VERSION=1.14.0
-ARG OTP_VERSION=25.2
-ARG DEBIAN_VERSION=bullseye-20221004-slim
+ARG ELIXIR_VERSION=1.17.2
+ARG OTP_VERSION=27.0
+ARG DEBIAN_VERSION=bullseye-20240701-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
@@ -21,7 +21,7 @@ ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 FROM ${BUILDER_IMAGE} as builder
 
 # install build dependencies
-RUN apt-get update -y && apt-get install -y build-essential git \
+RUN apt-get update -y && apt-get install -y build-essential git npm \
     && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # prepare build dir
@@ -52,7 +52,8 @@ COPY lib lib
 COPY assets assets
 
 # compile assets
-RUN mix tailwind.install
+RUN mix tailwind.install --no-assets
+RUN npm install --prefix assets
 RUN mix assets.deploy
 
 # Compile the release
@@ -68,7 +69,8 @@ RUN mix release
 # the compiled release and other runtime necessities
 FROM ${RUNNER_IMAGE}
 
-RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
+RUN apt-get update -y && \
+  apt-get install -y libstdc++6 openssl libncurses5 locales ca-certificates \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*
 
 # Set the locale
@@ -87,13 +89,15 @@ ENV MIX_ENV="prod"
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/beacon_demo ./
 
-USER nobody
-
-RUN mkdir -p /app/bin/_build
+# Copy the tailwind-cli binary used to compile stylesheets for pages
+RUN mkdir -p ./bin/_build
 COPY --from=builder --chown=nobody:root /app/_build/tailwind-* ./bin/_build/
 
-CMD ["/app/bin/server"]
+USER nobody
 
-# Appended by flyctl
-ENV ECTO_IPV6 true
-ENV ERL_AFLAGS "-proto_dist inet6_tcp"
+# If using an environment that doesn't automatically reap zombie processes, it is
+# advised to add an init process such as tini via `apt-get install`
+# above and adding an entrypoint. See https://github.com/krallin/tini for details
+# ENTRYPOINT ["/tini", "--"]
+
+CMD ["/app/bin/server"]
