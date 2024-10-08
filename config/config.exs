@@ -37,8 +37,8 @@ config :esbuild,
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ],
-  tailwind_config: [
-    args: ~w(tailwind.config.js --bundle --format=esm --target=es2020 --outfile=../priv/tailwind.config.bundle.js),
+  tailwind_bundle: [
+    args: ~w(tailwind.config.js --bundle --format=esm --target=es2020 --minify --outfile=../priv/tailwind.config.bundle.js),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
