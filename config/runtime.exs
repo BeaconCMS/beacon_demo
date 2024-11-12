@@ -1,5 +1,15 @@
 import Config
 
+config :beacon, :demo,
+  site: :demo,
+  repo: BeaconDemo.Repo,
+  endpoint: BeaconDemoWeb.Endpoint,
+  router: BeaconDemoWeb.Router,
+  tailwind_config: Path.join(Application.app_dir(:beacon_demo, "priv"), "tailwind.config.bundle.js"),
+  extra_page_fields: [
+    BeaconDemo.Beacon.PageFields.Type
+  ]
+
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the
 # system starts, so it is typically used to load production configuration

@@ -34,6 +34,7 @@ defmodule BeaconDemo.MixProject do
     [
       beacon_dep(),
       beacon_live_admin_dep(),
+      {:igniter, "~> 0.4"},
       {:bandit, "~> 1.5"},
       {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.4"},

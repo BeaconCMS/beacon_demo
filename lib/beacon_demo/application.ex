@@ -18,16 +18,9 @@ defmodule BeaconDemo.Application do
       {Finch, name: BeaconDemo.Finch},
       # Start Beacon sites
       {Beacon,
-       sites: [
-         [
-           site: :demo,
-           repo: BeaconDemo.Repo,
-           endpoint: BeaconDemoWeb.Endpoint,
-           router: BeaconDemoWeb.Router,
-           tailwind_config: Path.join(Application.app_dir(:beacon_demo, "priv"), "tailwind.config.bundle.js"),
-           extra_page_fields: [
-             BeaconDemo.Beacon.PageFields.Type
-           ]
+       [
+         sites: [
+           Application.fetch_env!(:beacon, :demo)
          ]
        ]},
       # Start the Endpoint (http/https)
