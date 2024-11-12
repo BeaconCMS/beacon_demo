@@ -83,11 +83,11 @@ defmodule BeaconDemo.MixProject do
     [
       setup: ["deps.get", "assets.setup", "ecto.setup"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind default", "esbuild default", "esbuild tailwind_bundle"],
+      "assets.build": ["tailwind default", "esbuild default", "esbuild beacon_tailwind_config"],
       "assets.deploy": [
         "tailwind default --minify",
         "esbuild default --minify",
-        "esbuild tailwind_bundle --minify",
+        "esbuild beacon_tailwind_config --minify",
         "phx.digest"
       ],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds/beacon.exs"],
