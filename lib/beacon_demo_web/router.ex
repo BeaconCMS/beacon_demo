@@ -16,10 +16,6 @@ defmodule BeaconDemoWeb.Router do
     plug Beacon.LiveAdmin.Plug
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/admin" do
     pipe_through [:browser, :beacon_admin]
     beacon_live_admin "/"
