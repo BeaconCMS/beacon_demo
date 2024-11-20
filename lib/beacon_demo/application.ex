@@ -16,6 +16,8 @@ defmodule BeaconDemo.Application do
       {Phoenix.PubSub, name: BeaconDemo.PubSub},
       # Start Finch
       {Finch, name: BeaconDemo.Finch},
+      # Start the Endpoint (http/https)
+      BeaconDemoWeb.Endpoint,
       # Start Beacon sites
       {Beacon,
        [
@@ -23,10 +25,6 @@ defmodule BeaconDemo.Application do
            Application.fetch_env!(:beacon, :demo)
          ]
        ]},
-      # Start the Endpoint (http/https)
-      BeaconDemoWeb.Endpoint
-      # Start a worker by calling: BeaconDemo.Worker.start_link(arg)
-      # {BeaconDemo.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
