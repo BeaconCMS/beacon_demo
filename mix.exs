@@ -34,24 +34,25 @@ defmodule BeaconDemo.MixProject do
     [
       beacon_dep(),
       beacon_live_admin_dep(),
+      {:igniter, "~> 0.4"},
+      {:bandit, "~> 1.5"},
       {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, "~> 0.17"},
-      {:phoenix_html, "~> 3.0"},
+      {:phoenix_html, "~> 4.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.19"},
-      {:heroicons, "~> 0.5"},
+      {:heroicons, github: "tailwindlabs/heroicons", tag: "v2.1.1", sparse: "optimized", app: false, compile: false, depth: 1},
       {:floki, ">= 0.30.0"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
       {:finch, "~> 0.13"},
-      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_metrics, "~> 1.0"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"},
       {:live_monaco_editor, "~> 0.1"}
     ]
   end
@@ -60,8 +61,7 @@ defmodule BeaconDemo.MixProject do
     if path = System.get_env("BEACON_PATH") do
       {:beacon, path: path, override: true}
     else
-      {:beacon,
-       github: "BeaconCMS/beacon", ref: "1d8d2fd636a40c107d47d0a87869930fdd0f82d0", override: true}
+      {:beacon, "~> 0.2.0", override: true}
     end
   end
 
@@ -69,8 +69,7 @@ defmodule BeaconDemo.MixProject do
     if path = System.get_env("BEACON_LIVE_ADMIN_PATH") do
       {:beacon_live_admin, path: path}
     else
-      {:beacon_live_admin,
-       github: "BeaconCMS/beacon_live_admin", ref: "778e5aff844de7533685cbf9a429d3bef7595349"}
+      {:beacon_live_admin, ">= 0.0.0"}
     end
   end
 
@@ -82,12 +81,18 @@ defmodule BeaconDemo.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "assets.setup", "ecto.setup"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/beacon_seeds.exs"],
+      setup: ["deps.get", "assets.setup", "assets.build", "ecto.setup"],
+      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing", "cmd npm install --prefix assets"],
+      "assets.build": ["tailwind default", "esbuild default", "esbuild beacon_tailwind_config"],
+      "assets.deploy": [
+        "tailwind default --minify",
+        "esbuild default --minify",
+        "esbuild beacon_tailwind_config --minify",
+        "phx.digest"
+      ],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds/beacon.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
 end

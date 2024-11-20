@@ -1,23 +1,20 @@
 import Config
 
 # Configure your database
-
 config :beacon_demo, BeaconDemo.Repo,
-  username: System.get_env("POSTGRES_USER") || "postgres",
-  password: System.get_env("POSTGRES_PASSWORD") || "postgres",
-  hostname: System.get_env("POSTGRES_HOSTNAME") || "localhost",
-  database: System.get_env("POSTGRES_DATABASE") || "beacon_demo",
-  port: System.get_env("POSTGRES_PORT") || 5432,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "beacon_demo_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
 config :beacon, Beacon.Repo,
-  username: System.get_env("POSTGRES_USER") || "postgres",
-  password: System.get_env("POSTGRES_PASSWORD") || "postgres",
-  hostname: System.get_env("POSTGRES_HOSTNAME") || "localhost",
-  database: System.get_env("POSTGRES_DATABASE") || "beacon_demo",
-  port: System.get_env("POSTGRES_PORT") || 5432,
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "beacon_demo_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -38,7 +35,8 @@ config :beacon_demo, BeaconDemoWeb.Endpoint,
   secret_key_base: "A0DSgxjGCYZ6fCIrBlg6L+qC/cdoFq5Rmomm53yacVmN95Wcpl57Gv0sTJjKjtIp",
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
+    beacon_tailwind_config: {Esbuild, :install_and_run, [:beacon_tailwind_config, ~w(--watch)]}
   ]
 
 # ## SSL Support

@@ -18,13 +18,10 @@ defmodule BeaconDemo.Application do
       {Finch, name: BeaconDemo.Finch},
       # Start Beacon sites
       {Beacon,
-       sites: [
-         [
-           site: :demo,
-           data_source: BeaconDemo.BeaconDataSource,
-           endpoint: BeaconDemoWeb.Endpoint
-         ],
-         [site: :blog, data_source: BeaconDemo.BeaconDataSource, endpoint: BeaconDemoWeb.Endpoint]
+       [
+         sites: [
+           Application.fetch_env!(:beacon, :demo)
+         ]
        ]},
       # Start the Endpoint (http/https)
       BeaconDemoWeb.Endpoint

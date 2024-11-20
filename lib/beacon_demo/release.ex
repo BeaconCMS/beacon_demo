@@ -22,7 +22,7 @@ defmodule BeaconDemo.Release do
     load_app()
 
     {:ok, _, _} =
-      Ecto.Migrator.with_repo(Beacon.Repo, fn _repo ->
+      Ecto.Migrator.with_repo(BeaconDemo.Repo, fn _repo ->
         seeds_path = Path.join([:code.priv_dir(@app), "repo", "beacon_seeds.exs"])
         Code.eval_file(seeds_path)
       end)

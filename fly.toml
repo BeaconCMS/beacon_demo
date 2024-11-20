@@ -1,40 +1,60 @@
-app = "dy-beacon-demo"
-kill_signal = "SIGTERM"
-kill_timeout = 5
-processes = []
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 
-[deploy]
-  release_command = "/app/bin/migrate"
-
-[env]
-  PHX_HOST = "dy-beacon-demo.fly.dev"
-  PORT = "8080"
+app = 'beacon-demo'
+primary_region = 'ewr'
+kill_signal = 'SIGTERM'
+kill_timeout = '5s'
 
 [experimental]
   auto_rollback = true
 
-[[services]]
-  http_checks = []
+[build]
+
+[deploy]
+  release_command = '/app/bin/migrate'
+
+[env]
+  PHX_HOST = 'beacon-demo.fly.dev'
+  PORT = '8080'
+
+[http_service]
   internal_port = 8080
-  processes = ["app"]
-  protocol = "tcp"
-  script_checks = []
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+  [http_service.concurrency]
+    type = 'connections'
+    hard_limit = 1000
+    soft_limit = 1000
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 8080
+  processes = ['app']
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
+
   [services.concurrency]
+    type = 'connections'
     hard_limit = 25
     soft_limit = 20
-    type = "connections"
-
-  [[services.ports]]
-    force_https = true
-    handlers = ["http"]
-    port = 80
-
-  [[services.ports]]
-    handlers = ["tls", "http"]
-    port = 443
 
   [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+    interval = '15s'
+    timeout = '2s'
+    grace_period = '1s'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
