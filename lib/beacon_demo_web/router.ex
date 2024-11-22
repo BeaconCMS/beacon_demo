@@ -2,6 +2,7 @@ defmodule BeaconDemoWeb.Router do
   use BeaconDemoWeb, :router
   use Beacon.Router
   use Beacon.LiveAdmin.Router
+  import Phoenix.LiveDashboard.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -23,6 +24,7 @@ defmodule BeaconDemoWeb.Router do
 
   scope "/" do
     pipe_through :browser
+    live_dashboard "/dashboard"
     beacon_site "/", site: :demo
   end
 end

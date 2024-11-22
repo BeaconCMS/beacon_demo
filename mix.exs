@@ -43,6 +43,7 @@ defmodule BeaconDemo.MixProject do
       {:phoenix_html, "~> 4.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.19"},
+      {:phoenix_live_dashboard, "~> 0.7"},
       {:heroicons, github: "tailwindlabs/heroicons", tag: "v2.1.1", sparse: "optimized", app: false, compile: false, depth: 1},
       {:floki, ">= 0.30.0"},
       {:esbuild, "~> 0.5", runtime: Mix.env() == :dev},
