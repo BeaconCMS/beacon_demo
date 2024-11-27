@@ -9,8 +9,39 @@ defmodule BeaconDemo.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: [
+        beacon_demo: [
+          steps: [:assemble, &copy_beacon_files/1]
+        ]
+      ]
     ]
+  end
+
+  defp copy_beacon_files(%{path: path} = release) do
+    case Path.wildcard("_build/tailwind-*") do
+      [] ->
+        raise """
+        tailwind-cli not found
+
+        Execute the following command to install it before proceeding:
+
+            mix tailwind.install
+
+        """
+
+      tailwind_bin_path ->
+        build_path = Path.join([path, "bin", "_build"])
+        File.mkdir_p!(build_path)
+
+        for file <- tailwind_bin_path do
+          File.cp!(file, Path.join(build_path, Path.basename(file)))
+        end
+    end
+
+    File.cp!(Path.join(["assets", "css", "app.css"]), Path.join(path, "app.css"))
+
+    release
   end
 
   # Configuration for the OTP application.
@@ -84,11 +115,10 @@ defmodule BeaconDemo.MixProject do
     [
       setup: ["deps.get", "assets.setup", "assets.build", "ecto.setup"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing", "cmd npm install --prefix assets"],
-      "assets.build": ["tailwind default", "esbuild default", "esbuild beacon_tailwind_config"],
+      "assets.build": ["tailwind default", "esbuild default"],
       "assets.deploy": [
         "tailwind default --minify",
         "esbuild default --minify",
-        "esbuild beacon_tailwind_config --minify",
         "phx.digest"
       ],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds/beacon.exs"],

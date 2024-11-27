@@ -1,6 +1,4 @@
 defmodule BeaconDemo.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
   @moduledoc false
 
   use Application
@@ -19,12 +17,7 @@ defmodule BeaconDemo.Application do
       # Start the Endpoint (http/https)
       BeaconDemoWeb.Endpoint,
       # Start Beacon sites
-      {Beacon,
-       [
-         sites: [
-           Application.fetch_env!(:beacon, :demo)
-         ]
-       ]},
+      {Beacon, [sites: [Application.fetch_env!(:beacon, :demo)]]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

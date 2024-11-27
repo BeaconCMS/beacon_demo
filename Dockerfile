@@ -7,13 +7,13 @@
 # This file is based on these images:
 #
 #   - https://hub.docker.com/r/hexpm/elixir/tags - for the build image
-#   - https://hub.docker.com/_/debian?tab=tags&page=1&name=bullseye-20240701-slim - for the release image
+#   - https://hub.docker.com/_/debian?tab=tags&page=1&name=bullseye-20240904-slim - for the release image
 #   - https://pkgs.org/ - resource for finding needed packages
-#   - Ex: hexpm/elixir:1.17.2-erlang-27.0-debian-bullseye-20240701-slim
+#   - Ex: hexpm/elixir:1.17.2-erlang-27.0.1-debian-bullseye-20240904-slim
 #
 ARG ELIXIR_VERSION=1.17.2
-ARG OTP_VERSION=27.0
-ARG DEBIAN_VERSION=bullseye-20240701-slim
+ARG OTP_VERSION=27.0.1
+ARG DEBIAN_VERSION=bullseye-20240904-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
@@ -52,8 +52,6 @@ COPY lib lib
 COPY assets assets
 
 # compile assets
-RUN mix tailwind.install --no-assets
-RUN npm install --prefix assets
 RUN mix assets.deploy
 
 # Compile the release
@@ -88,10 +86,6 @@ ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
 COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/beacon_demo ./
-
-# Copy the tailwind-cli binary used to compile stylesheets for pages
-RUN mkdir -p ./bin/_build
-COPY --from=builder --chown=nobody:root /app/_build/tailwind-* ./bin/_build/
 
 USER nobody
 
