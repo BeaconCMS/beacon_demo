@@ -32,3 +32,5 @@ beacon_demo-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Editor
+/.lexical

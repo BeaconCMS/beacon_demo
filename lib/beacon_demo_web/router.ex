@@ -13,6 +13,10 @@ defmodule BeaconDemoWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :beacon do
+    plug Beacon.Plug
+  end
+
   pipeline :beacon_admin do
     plug Beacon.LiveAdmin.Plug
   end
@@ -23,7 +27,7 @@ defmodule BeaconDemoWeb.Router do
   end
 
   scope "/" do
-    pipe_through :browser
+    pipe_through [:browser, :beacon]
     live_dashboard "/dashboard"
     beacon_site "/", site: :demo
   end
