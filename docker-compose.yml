@@ -1,0 +1,15 @@
+services:
+  database:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER="${POSTGRES_USER}"
+      - POSTGRES_PASSWORD="${POSTGRES_PASSWORD}"
+      - POSTGRES_DB="${POSTGRES_DATABASE}"
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT:-55432}:5432"
+    volumes:
+      - prototype-db-data:/var/lib/postgresql/data
+volumes:
+  prototype-db-data:
