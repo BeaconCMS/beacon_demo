@@ -2,21 +2,10 @@ import Config
 
 # Configure your database
 config :beacon_demo, BeaconDemo.Repo,
-  username: System.get_env("POSTGRES_USER") || "postgres",
-  password: System.get_env("POSTGRES_PASSWORD") || "postgres",
-  hostname: System.get_env("POSTGRES_HOSTNAME") || "localhost",
-  database: System.get_env("POSTGRES_DATABASE") || "beacon_demo",
-  port: System.get_env("POSTGRES_PORT") || 4432,
-  stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
-
-config :beacon, Beacon.Repo,
-  username: System.get_env("POSTGRES_USER") || "postgres",
-  password: System.get_env("POSTGRES_PASSWORD") || "postgres",
-  hostname: System.get_env("POSTGRES_HOSTNAME") || "localhost",
-  database: System.get_env("POSTGRES_DATABASE") || "beacon_demo",
-  port: System.get_env("POSTGRES_PORT") || 4432,
+  username:  "postgres",
+  password:  "postgres",
+  hostname:  "localhost",
+  database:  "beacon_demo_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
