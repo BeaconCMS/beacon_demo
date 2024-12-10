@@ -10,16 +10,27 @@ import Config
 config :beacon_demo,
   ecto_repos: [BeaconDemo.Repo]
 
+config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
+  url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
+  live_view: [signing_salt: "O68x1k5A"],
+  session: [
+    store: :cookie,
+    key: "_beacon_demo_key",
+    signing_salt: "O68x1k5A",
+    same_site: "Lax"
+  ]
+
 # Configures the endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: BeaconDemoWeb.ErrorHTML, json: BeaconDemoWeb.ErrorJSON],
+    formats: [html: Beacon.Web.ErrorHTML, json: BeaconDemoWeb.ErrorJSON],
     layout: false
   ],
   pubsub_server: BeaconDemo.PubSub,
-  live_view: [signing_salt: "O67x1k5A"]
+  live_view: [signing_salt: "O68x1k5A"]
 
 # Configures the mailer
 #

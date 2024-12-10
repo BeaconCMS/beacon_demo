@@ -26,7 +26,8 @@ config :beacon, :demo,
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 if System.get_env("PHX_SERVER") do
-  config :beacon_demo, BeaconDemoWeb.Endpoint, server: true
+  config :beacon_demo, BeaconDemoWeb.Endpoint, server: false
+  config :beacon_demo, BeaconDemoWeb.ProxyEndpoint, server: true
 end
 
 if config_env() == :prod do
@@ -59,6 +60,11 @@ if config_env() == :prod do
 
   host = System.get_env("PHX_HOST") || "example.com"
   port = String.to_integer(System.get_env("PORT") || "4000")
+
+  config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
+    url: [port: 443, scheme: "https"],
+    http: [ip: {0, 0, 0, 0, 0, 0, 0, 0}, port: port],
+    secret_key_base: secret_key_base
 
   config :beacon_demo, BeaconDemoWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
