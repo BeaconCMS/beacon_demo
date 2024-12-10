@@ -4,14 +4,9 @@ defmodule BeaconDemoWeb.Endpoint do
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
-  @session_options [
-    store: :cookie,
-    key: "_beacon_demo_key",
-    signing_salt: "WRPpgUcQ",
-    same_site: "Lax"
-  ]
-
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  #
+  # The proxy endpoint must share the same session options with each child endpoint
+  @session_options Application.compile_env!(:beacon_demo, BeaconDemoWeb.ProxyEndpoint)[:session]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
