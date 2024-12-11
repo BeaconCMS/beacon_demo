@@ -10,15 +10,17 @@ import Config
 config :beacon_demo,
   ecto_repos: [BeaconDemo.Repo]
 
-config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
-  adapter: Bandit.PhoenixAdapter,
-  live_view: [signing_salt: "O68x1k5A"],
+config :beacon_demo, :endpoint,
   session: [
     store: :cookie,
     key: "_beacon_demo_key",
     signing_salt: "O68x1k5A",
     same_site: "Lax"
   ]
+
+config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
+  adapter: Bandit.PhoenixAdapter,
+  live_view: [signing_salt: "O68x1k5A"]
 
 config :beacon_demo, BeaconDemoWeb.Endpoint,
   url: [host: "localhost"],

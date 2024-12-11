@@ -6,7 +6,7 @@ defmodule BeaconDemoWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   #
   # The proxy endpoint must share the same session options with each child endpoint
-  @session_options Application.compile_env!(:beacon_demo, BeaconDemoWeb.ProxyEndpoint)[:session]
+  @session_options Application.compile_env!(:beacon_demo, :endpoint)[:session]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
