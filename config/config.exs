@@ -11,7 +11,6 @@ config :beacon_demo,
   ecto_repos: [BeaconDemo.Repo]
 
 config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
-  url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   live_view: [signing_salt: "O68x1k5A"],
   session: [
@@ -21,7 +20,6 @@ config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
     same_site: "Lax"
   ]
 
-# Configures the endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
