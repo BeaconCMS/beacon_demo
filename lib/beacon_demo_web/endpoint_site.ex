@@ -1,11 +1,8 @@
 defmodule BeaconDemoWeb.EndpointSite do
   use Phoenix.Endpoint, otp_app: :beacon_demo
 
-  # The session will be stored in the cookie and signed,
-  # this means its contents can be read but not tampered with.
-  # Set :encryption_salt if you would also like to encrypt it.
-  #
-  # The proxy endpoint must share the same session options with each child endpoint
+  # share the same session_options used in the proxy endpoint
+  # so both `socket /live` and Plug.Session have the same keys
   @session_options Application.compile_env!(:beacon_demo, :endpoint)[:session_options]
 
   # Serve at "/" the static files from "priv/static" directory.

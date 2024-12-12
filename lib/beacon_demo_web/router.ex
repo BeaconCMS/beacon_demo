@@ -31,6 +31,8 @@ defmodule BeaconDemoWeb.Router do
     live_dashboard "/dashboard"
   end
 
+  # must match the custom endpoint host (domain)
+  # and also localhost for local development
   scope "/", host: ["localhost", "beacon-test.me"] do
     pipe_through [:browser, :beacon]
     beacon_site "/", site: :demo

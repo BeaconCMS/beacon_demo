@@ -10,6 +10,8 @@ import Config
 config :beacon_demo,
   ecto_repos: [BeaconDemo.Repo]
 
+# store session_options in a config so it can be shared among all endpoints,
+# including the proxy endpoint which has the `socket /live`
 config :beacon_demo, :endpoint,
   session_options: [
     store: :cookie,
@@ -18,10 +20,13 @@ config :beacon_demo, :endpoint,
     same_site: "Lax"
   ]
 
+# the proxy endpoint only needs the bare minimun config to connect live views
 config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
   adapter: Bandit.PhoenixAdapter,
   live_view: [signing_salt: "O68x1k5A"]
 
+# default app endpoint
+# must have the save signing_salt as the proxy endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
@@ -32,6 +37,8 @@ config :beacon_demo, BeaconDemoWeb.Endpoint,
   pubsub_server: BeaconDemo.PubSub,
   live_view: [signing_salt: "O68x1k5A"]
 
+# site endpoint to serve a custom domain
+# must have the save signing_salt as the proxy endpoint
 config :beacon_demo, BeaconDemoWeb.EndpointSite,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,

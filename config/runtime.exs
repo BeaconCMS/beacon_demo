@@ -26,6 +26,8 @@ config :beacon, :demo,
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 if System.get_env("PHX_SERVER") do
+  # only start the proxy endpoint web server
+  # because that's the only entry point for all requests
   config :beacon_demo, BeaconDemoWeb.ProxyEndpoint, server: true
 end
 
@@ -61,6 +63,7 @@ if config_env() == :prod do
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
+    # must add all custom endpoints in the proxy
     check_origin: [
       "https://beacon-test.me",
     ],
@@ -79,6 +82,7 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  # configure the custom domain for the site endpoint
   config :beacon_demo, BeaconDemoWeb.EndpointSite,
     url: [host: "beacon-test.me", port: 443, scheme: "https"],
     http: [
