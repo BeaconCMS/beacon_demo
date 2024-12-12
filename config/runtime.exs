@@ -3,7 +3,7 @@ import Config
 config :beacon, :demo,
   site: :demo,
   repo: BeaconDemo.Repo,
-  endpoint: BeaconDemoWeb.Endpoint,
+  endpoint: BeaconDemoWeb.EndpointSite,
   router: BeaconDemoWeb.Router,
   extra_page_fields: [
     BeaconDemo.Beacon.PageFields.Type
@@ -70,6 +70,14 @@ if config_env() == :prod do
 
   config :beacon_demo, BeaconDemoWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
+    http: [
+      ip: {0, 0, 0, 0, 0, 0, 0, 0},
+      port: port
+    ],
+    secret_key_base: secret_key_base
+
+  config :beacon_demo, BeaconDemoWeb.EndpointSite,
+    url: [host: "beacon-test.me", port: 443, scheme: "https"],
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: port

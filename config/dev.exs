@@ -35,6 +35,17 @@ config :beacon_demo, BeaconDemoWeb.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
+config :beacon_demo, BeaconDemoWeb.EndpointSite,
+  http: [ip: {127, 0, 0, 1}, port: 4002],
+  check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "A0DSgxjGCYZ6fCIrBlg6L+qC/cdoFq5Rmomm53yacVmN95Wcpl57Gv0sTJjKjtIp",
+  watchers: [
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

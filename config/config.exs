@@ -11,7 +11,7 @@ config :beacon_demo,
   ecto_repos: [BeaconDemo.Repo]
 
 config :beacon_demo, :endpoint,
-  session: [
+  session_options: [
     store: :cookie,
     key: "_beacon_demo_key",
     signing_salt: "O68x1k5A",
@@ -23,6 +23,16 @@ config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
   live_view: [signing_salt: "O68x1k5A"]
 
 config :beacon_demo, BeaconDemoWeb.Endpoint,
+  url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
+  render_errors: [
+    formats: [html: Beacon.Web.ErrorHTML, json: BeaconDemoWeb.ErrorJSON],
+    layout: false
+  ],
+  pubsub_server: BeaconDemo.PubSub,
+  live_view: [signing_salt: "O68x1k5A"]
+
+config :beacon_demo, BeaconDemoWeb.EndpointSite,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [

@@ -1,4 +1,4 @@
-defmodule BeaconDemoWeb.Endpoint do
+defmodule BeaconDemoWeb.EndpointSite do
   use Phoenix.Endpoint, otp_app: :beacon_demo
 
   # The session will be stored in the cookie and signed,

@@ -27,8 +27,12 @@ defmodule BeaconDemoWeb.Router do
   end
 
   scope "/" do
-    pipe_through [:browser, :beacon]
+    pipe_through [:browser]
     live_dashboard "/dashboard"
+  end
+
+  scope "/", host: ["localhost", "beacon-test.me"] do
+    pipe_through [:browser, :beacon]
     beacon_site "/", site: :demo
   end
 end
