@@ -3,7 +3,7 @@ defmodule BeaconDemoWeb.Endpoint do
 
   # share the same session_options used in the proxy endpoint
   # so both `socket /live` and Plug.Session have the same keys
-  @session_options Application.compile_env!(:beacon_demo, :endpoint)[:session_options]
+  @session_options Application.compile_env!(:beacon_demo, :session_options)
 
   # Serve at "/" the static files from "priv/static" directory.
   #

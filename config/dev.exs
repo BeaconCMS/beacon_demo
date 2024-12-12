@@ -41,6 +41,7 @@ config :beacon_demo, BeaconDemoWeb.EndpointSite,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "A0DSgxjGCYZ6fCIrBlg6L+qC/cdoFq5Rmomm53yacVmN95Wcpl57Gv0sTJjKjtIp",
+  # TODO: beacon_tailwind_config watcher
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}

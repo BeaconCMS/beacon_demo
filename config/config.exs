@@ -12,13 +12,11 @@ config :beacon_demo,
 
 # store session_options in a config so it can be shared among all endpoints,
 # including the proxy endpoint which has the `socket /live`
-config :beacon_demo, :endpoint,
-  session_options: [
-    store: :cookie,
-    key: "_beacon_demo_key",
-    signing_salt: "O68x1k5A",
-    same_site: "Lax"
-  ]
+config :beacon_demo, :session_options,
+  store: :cookie,
+  key: "_beacon_demo_key",
+  signing_salt: "O68x1k5A",
+  same_site: "Lax"
 
 # the proxy endpoint only needs the bare minimun config to connect live views
 config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
