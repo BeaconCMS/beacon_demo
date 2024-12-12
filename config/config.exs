@@ -10,16 +10,42 @@ import Config
 config :beacon_demo,
   ecto_repos: [BeaconDemo.Repo]
 
-# Configures the endpoint
+# store session_options in a config so it can be shared among all endpoints,
+# including the proxy endpoint which has the `socket /live`
+config :beacon_demo, :session_options,
+  store: :cookie,
+  key: "_beacon_demo_key",
+  signing_salt: "O68x1k5A",
+  same_site: "Lax"
+
+# the proxy endpoint only needs the bare minimun config to connect live views
+config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
+  adapter: Bandit.PhoenixAdapter,
+  live_view: [signing_salt: "O68x1k5A"]
+
+# default app endpoint
+# must have the save signing_salt as the proxy endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: BeaconDemoWeb.ErrorHTML, json: BeaconDemoWeb.ErrorJSON],
+    formats: [html: Beacon.Web.ErrorHTML, json: BeaconDemoWeb.ErrorJSON],
     layout: false
   ],
   pubsub_server: BeaconDemo.PubSub,
-  live_view: [signing_salt: "O67x1k5A"]
+  live_view: [signing_salt: "O68x1k5A"]
+
+# site endpoint to serve a custom domain
+# must have the save signing_salt as the proxy endpoint
+config :beacon_demo, BeaconDemoWeb.EndpointSite,
+  url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
+  render_errors: [
+    formats: [html: Beacon.Web.ErrorHTML, json: BeaconDemoWeb.ErrorJSON],
+    layout: false
+  ],
+  pubsub_server: BeaconDemo.PubSub,
+  live_view: [signing_salt: "O68x1k5A"]
 
 # Configures the mailer
 #

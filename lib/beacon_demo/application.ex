@@ -14,8 +14,10 @@ defmodule BeaconDemo.Application do
       {Phoenix.PubSub, name: BeaconDemo.PubSub},
       # Start Finch
       {Finch, name: BeaconDemo.Finch},
-      # Start the Endpoint (http/https)
+      # start all endpoints, even though only proxy has a web server started
       BeaconDemoWeb.Endpoint,
+      BeaconDemoWeb.EndpointSite,
+      BeaconDemoWeb.ProxyEndpoint,
       # Start Beacon sites
       {Beacon, [sites: [Application.fetch_env!(:beacon, :demo)]]}
     ]

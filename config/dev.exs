@@ -2,13 +2,19 @@ import Config
 
 # Configure your database
 config :beacon_demo, BeaconDemo.Repo,
-  username:  "postgres",
-  password:  "postgres",
-  hostname:  "localhost",
-  database:  "beacon_demo_dev",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  database: "beacon_demo_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
+
+config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
+  http: [ip: {127, 0, 0, 1}, port: 4000],
+  check_origin: false,
+  debug_errors: true,
+  secret_key_base: "A0DSgxjGCYZ6fCIrBlg6L+qC/cdoFq5Rmomm53yacVmN95Wcpl57Gv0sTJjKjtIp"
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -19,11 +25,23 @@ config :beacon_demo, BeaconDemo.Repo,
 config :beacon_demo, BeaconDemoWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {127, 0, 0, 1}, port: 4001],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "A0DSgxjGCYZ6fCIrBlg6L+qC/cdoFq5Rmomm53yacVmN95Wcpl57Gv0sTJjKjtIp",
+  watchers: [
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+  ]
+
+config :beacon_demo, BeaconDemoWeb.EndpointSite,
+  http: [ip: {127, 0, 0, 1}, port: 4002],
+  check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "A0DSgxjGCYZ6fCIrBlg6L+qC/cdoFq5Rmomm53yacVmN95Wcpl57Gv0sTJjKjtIp",
+  # TODO: beacon_tailwind_config watcher
   watchers: [
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}

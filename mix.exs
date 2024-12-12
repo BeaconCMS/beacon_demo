@@ -93,7 +93,8 @@ defmodule BeaconDemo.MixProject do
     if path = System.get_env("BEACON_PATH") do
       {:beacon, path: path, override: true}
     else
-      {:beacon, "~> 0.3", override: true}
+      # {:beacon, "~> 0.3", override: true}
+      {:beacon, github: "BeaconCMS/beacon", ref: "3f33ab8", override: true}
     end
   end
 

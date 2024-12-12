@@ -1,4 +1,4 @@
-defmodule BeaconDemoWeb.Endpoint do
+defmodule BeaconDemoWeb.EndpointSite do
   use Phoenix.Endpoint, otp_app: :beacon_demo
 
   # share the same session_options used in the proxy endpoint
