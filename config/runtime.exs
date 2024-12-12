@@ -61,7 +61,10 @@ if config_env() == :prod do
   port = String.to_integer(System.get_env("PORT") || "4000")
 
   config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
-    url: [host: host, port: 443, scheme: "https"],
+    check_origin: [
+      "https://beacon-test.me",
+    ],
+    url: [port: 443, scheme: "https"],
     http: [
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: port
