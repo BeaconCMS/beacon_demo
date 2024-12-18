@@ -1,6 +1,8 @@
 defmodule BeaconDemo.MixProject do
   use Mix.Project
 
+  @dev? System.get_env("BEACON_DEMO_DEV") in ["true", "1"]
+
   def project do
     [
       app: :beacon_demo,
@@ -90,18 +92,28 @@ defmodule BeaconDemo.MixProject do
   end
 
   defp beacon_dep do
-    if path = System.get_env("BEACON_PATH") do
-      {:beacon, path: path, override: true}
-    else
-      {:beacon, "~> 0.3", override: true}
+    cond do
+      path = System.get_env("BEACON_PATH") ->
+        {:beacon, path: path, override: true}
+
+      @dev? ->
+        {:beacon, github: "BeaconCMS/beacon", override: true}
+
+      :else ->
+        {:beacon, ">= 0.0.0 and < 1.0.0", override: true}
     end
   end
 
   defp beacon_live_admin_dep do
-    if path = System.get_env("BEACON_LIVE_ADMIN_PATH") do
-      {:beacon_live_admin, path: path}
-    else
-      {:beacon_live_admin, ">= 0.0.0"}
+    cond do
+      path = System.get_env("BEACON_LIVE_ADMIN_PATH") ->
+        {:beacon_live_admin, path: path}
+
+      @dev? ->
+        {:beacon_live_admin, github: "BeaconCMS/beacon_live_admin"}
+
+      :else ->
+        {:beacon_live_admin, ">= 0.0.0"}
     end
   end
 
