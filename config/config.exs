@@ -10,13 +10,14 @@ import Config
 config :beacon_demo, BeaconDemoWeb.ProxyEndpoint, adapter: Bandit.PhoenixAdapter, live_view: [signing_salt: "uyrD0UiP"]
 
 config :beacon_demo,
-  ecto_repos: [BeaconDemo.Repo],
   session_options: [
     store: :cookie,
     key: "_beacon_demo_key",
     signing_salt: "uyrD0UiP",
     same_site: "Lax"
   ]
+
+config :beacon_demo, ecto_repos: [BeaconDemo.Repo]
 
 # default app endpoint
 # must have the save signing_salt as the proxy endpoint

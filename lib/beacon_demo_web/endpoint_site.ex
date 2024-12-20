@@ -1,6 +1,10 @@
 defmodule BeaconDemoWeb.EndpointSite do
   use Phoenix.Endpoint, otp_app: :beacon_demo
 
+  @session_options Application.compile_env!(:beacon_demo, :session_options)
+
+  # socket /live must be in the proxy endpoint
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phx.digest
@@ -30,5 +34,6 @@ defmodule BeaconDemoWeb.EndpointSite do
 
   plug Plug.MethodOverride
   plug Plug.Head
+  plug Plug.Session, @session_options
   plug BeaconDemoWeb.Router
 end
