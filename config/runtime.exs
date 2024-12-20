@@ -65,7 +65,7 @@ if config_env() == :prod do
   config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
     # must add all custom endpoints in the proxy
     check_origin: [
-      "https://beacon-test.me",
+      "https://beacon-test.me"
     ],
     url: [port: 443, scheme: "https"],
     http: [
