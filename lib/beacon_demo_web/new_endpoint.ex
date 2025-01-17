@@ -1,15 +1,9 @@
-defmodule BeaconDemoWeb.Endpoint do
+defmodule BeaconDemoWeb.NewEndpoint do
   use Phoenix.Endpoint, otp_app: :beacon_demo
 
-  # The session will be stored in the cookie and signed,
-  # this means its contents can be read but not tampered with.
-  # Set :encryption_salt if you would also like to encrypt it.
-  @session_options [
-    store: :cookie,
-    key: "_beacon_demo_key",
-    signing_salt: "WRPpgUcQ",
-    same_site: "Lax"
-  ]
+  @session_options Application.compile_env!(:beacon_demo, :session_options)
+
+  # socket /live must be in the proxy endpoint
 
   # Serve at "/" the static files from "priv/static" directory.
   #
