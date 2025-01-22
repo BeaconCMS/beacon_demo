@@ -15,9 +15,11 @@ defmodule BeaconDemo.Application do
       # Start Finch
       {Finch, name: BeaconDemo.Finch},
       # Start Beacon sites
-      {Beacon, [sites: [Application.fetch_env!(:beacon, :demo)]]},
+      {Beacon, [sites: [Application.fetch_env!(:beacon, :demo), Application.fetch_env!(:beacon, :new_site)]]},
       # Start the Endpoint (http/https)
-      BeaconDemoWeb.Endpoint
+      BeaconDemoWeb.Endpoint,
+      BeaconDemoWeb.NewEndpoint,
+      BeaconDemoWeb.ProxyEndpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -21,6 +21,11 @@ defmodule BeaconDemoWeb.Router do
     plug Beacon.LiveAdmin.Plug
   end
 
+  scope "/", host: ["localhost", "new.site.com"] do
+    pipe_through [:browser, :beacon]
+    beacon_site "/", site: :new_site
+  end
+
   scope "/admin" do
     pipe_through [:browser, :beacon_admin]
     beacon_live_admin "/"
