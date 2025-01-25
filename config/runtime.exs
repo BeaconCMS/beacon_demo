@@ -1,12 +1,14 @@
 import Config
 
-config :beacon, :demo,
-  site: :demo,
-  repo: BeaconDemo.Repo,
-  endpoint: BeaconDemoWeb.Endpoint,
-  router: BeaconDemoWeb.Router,
-  extra_page_fields: [
-    BeaconDemo.Beacon.PageFields.Type
+config :beacon,
+  demo: [
+    site: :demo,
+    repo: BeaconDemo.Repo,
+    endpoint: BeaconDemoWeb.Endpoint,
+    router: BeaconDemoWeb.Router,
+    extra_page_fields: [
+      BeaconDemo.Beacon.PageFields.Type
+    ]
   ]
 
 # config/runtime.exs is executed for all environments, including
