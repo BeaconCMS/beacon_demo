@@ -7,7 +7,8 @@ config :beacon, :demo,
   router: BeaconDemoWeb.Router,
   extra_page_fields: [
     BeaconDemo.Beacon.PageFields.Type
-  ]
+  ],
+  tailwind_config: Path.join(Application.app_dir(:beacon_demo, "priv"), "beacon.tailwind.config.bundle.js")
 
 # config/runtime.exs is executed for all environments, including
 # during releases. It is executed after compilation and before the

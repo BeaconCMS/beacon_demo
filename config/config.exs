@@ -37,6 +37,11 @@ config :esbuild,
     args: ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ],
+  beacon_tailwind_config: [
+    args: ~w(beacon.tailwind.config.js --bundle --format=esm --target=es2020 --outfile=../priv/beacon.tailwind.config.bundle.js),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
 # Configure tailwind (the version is required)
