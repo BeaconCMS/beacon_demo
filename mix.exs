@@ -22,25 +22,33 @@ defmodule BeaconDemo.MixProject do
   end
 
   defp copy_beacon_files(%{path: path} = release) do
-    case Path.wildcard("_build/tailwind-*") do
-      [] ->
-        raise """
-        tailwind-cli not found
+    build_path = Path.join([path, "bin", "_build"])
+    File.mkdir_p!(build_path)
 
-        Execute the following command to install it before proceeding:
+    copy_bin! = fn name, pattern, cmd ->
+      case Path.wildcard(pattern) do
+        [] ->
+          raise """
+          #{name} binary not found in the release package
 
-            mix tailwind.install
+          You should execute the following command to download it:
 
-        """
+              #{cmd}
 
-      tailwind_bin_path ->
-        build_path = Path.join([path, "bin", "_build"])
-        File.mkdir_p!(build_path)
+          Note the binary must be present in the environment where the
+          release is generated, either locally or in the Dockerfile for example.
 
-        for file <- tailwind_bin_path do
-          File.cp!(file, Path.join(build_path, Path.basename(file)))
-        end
+          """
+
+        bin_path ->
+          for file <- bin_path do
+            File.cp!(file, Path.join(build_path, Path.basename(file)))
+          end
+      end
     end
+
+    copy_bin!.("tailwind", "_build/tailwind-*", "mix tailwind.install --no-assets")
+    copy_bin!.("esbuild", "_build/esbuild-*", "mix esbuild.install")
 
     File.cp!(Path.join(["assets", "css", "app.css"]), Path.join(path, "app.css"))
 
