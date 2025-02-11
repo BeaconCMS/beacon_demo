@@ -1,6 +1,11 @@
-defmodule BeaconDemoWeb.Endpoint do
+defmodule BeaconDemoWeb.DemoEndpoint do
   use Phoenix.Endpoint, otp_app: :beacon_demo
+
   @session_options Application.compile_env!(:beacon_demo, :session_options)
+
+  def proxy_endpoint, do: BeaconDemoWeb.ProxyEndpoint
+
+  # socket /live must be in the proxy endpoint
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -10,7 +15,8 @@ defmodule BeaconDemoWeb.Endpoint do
     at: "/",
     from: :beacon_demo,
     gzip: false,
-    only: BeaconDemoWeb.static_paths()
+    # robots.txt is served by Beacon
+    only: ~w(assets fonts images favicon.ico)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

@@ -1,7 +1,8 @@
 defmodule BeaconDemo.MixProject do
   use Mix.Project
 
-  @dev? System.get_env("BEACON_DEMO_DEV") in ["true", "1"]
+  @version "0.2.0-dev"
+  @dev? String.ends_with?(@version, "-dev") || System.get_env("BEACON_DEMO_DEV") in ["true", "1"]
 
   def project do
     [

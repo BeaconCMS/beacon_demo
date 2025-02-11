@@ -7,8 +7,29 @@
 # General application configuration
 import Config
 
+signing_salt = "TCyEuMUk"
+
 config :beacon_demo,
-  ecto_repos: [BeaconDemo.Repo]
+       BeaconDemoWeb.DemoEndpoint,
+       url: [host: "localhost"],
+       adapter: Bandit.PhoenixAdapter,
+       render_errors: [
+         formats: [html: Beacon.Web.ErrorHTML],
+         layout: false
+       ],
+       pubsub_server: BeaconDemo.PubSub,
+       live_view: [signing_salt: signing_salt]
+
+config :beacon_demo, BeaconDemoWeb.ProxyEndpoint, adapter: Bandit.PhoenixAdapter, live_view: [signing_salt: signing_salt]
+
+config :beacon_demo,
+  ecto_repos: [BeaconDemo.Repo],
+  session_options: [
+    store: :cookie,
+    key: "_beacon_demo_key",
+    signing_salt: signing_salt,
+    same_site: "Lax"
+  ]
 
 # Configures the endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,
@@ -19,7 +40,7 @@ config :beacon_demo, BeaconDemoWeb.Endpoint,
     layout: false
   ],
   pubsub_server: BeaconDemo.PubSub,
-  live_view: [signing_salt: "O67x1k5A"]
+  live_view: [signing_salt: signing_salt]
 
 # Configures the mailer
 #
