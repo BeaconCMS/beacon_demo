@@ -14,6 +14,13 @@ end
 
 default_layout = Content.get_layout_by(:demo, title: "Default")
 
+{:ok, default_layout} =
+  Content.update_layout(default_layout, %{
+    template: template.("default_layout.html.heex")
+  })
+
+Content.publish_layout(default_layout)
+
 {:ok, blog_layout} =
   %{
     site: "demo",
@@ -63,6 +70,18 @@ Content.create_event_handler(%{
   %{"waitlist" => %{"email" => email}} = event_params
   IO.puts("#{email} joined the waitlist")
   {:noreply, assign(socket, :joined, true)}
+  """
+})
+
+Content.create_js_hook(%{
+  site: "demo",
+  name: "tippy",
+  code: ~S"""
+  export const tippy = {
+    mounted() {
+      window.tippy(this.el, {content: 'Get in first!'})
+    }
+  }
   """
 })
 
@@ -130,8 +149,7 @@ blog_post_1 =
     site: "demo",
     layout_id: blog_layout.id,
     path: "/blog/exploring-the-power-of-elixir-a-functional-approach-to-web-development",
-    title:
-      "Exploring the Power of Elixir: A Functional Approach to Web Development - Blog - CMS Platform",
+    title: "Exploring the Power of Elixir: A Functional Approach to Web Development - Blog - CMS Platform",
     format: :markdown,
     template: template.("blog_post_1.md"),
     extra: %{"type" => "blog_post"}
@@ -144,8 +162,7 @@ blog_post_2 =
     site: "demo",
     layout_id: blog_layout.id,
     path: "/blog/the-future-of-web-development-embracing-the-power-of-serverless",
-    title:
-      "The Future of Web Development: Embracing the Power of Serverless - Blog - CMS Platform",
+    title: "The Future of Web Development: Embracing the Power of Serverless - Blog - CMS Platform",
     format: :markdown,
     template: template.("blog_post_2.md"),
     extra: %{"type" => "blog_post"}
