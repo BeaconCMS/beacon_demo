@@ -17,7 +17,9 @@ defmodule BeaconDemo.Application do
       # Start Beacon sites
       {Beacon, [sites: [Application.fetch_env!(:beacon, :demo)]]},
       # Start the Endpoint (http/https)
-      BeaconDemoWeb.Endpoint
+      BeaconDemoWeb.Endpoint,
+      BeaconDemoWeb.DemoEndpoint,
+      BeaconDemoWeb.ProxyEndpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
