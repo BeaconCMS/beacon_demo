@@ -10,6 +10,17 @@ import Config
 signing_salt = "TCyEuMUk"
 
 config :beacon_demo,
+       BeaconDemoWeb.BlogEndpoint,
+       url: [host: "localhost"],
+       adapter: Bandit.PhoenixAdapter,
+       render_errors: [
+         formats: [html: Beacon.Web.ErrorHTML],
+         layout: false
+       ],
+       pubsub_server: BeaconDemo.PubSub,
+       live_view: [signing_salt: signing_salt]
+
+config :beacon_demo,
        BeaconDemoWeb.DemoEndpoint,
        url: [host: "localhost"],
        adapter: Bandit.PhoenixAdapter,
