@@ -15,9 +15,10 @@ defmodule BeaconDemo.Application do
       # Start Finch
       {Finch, name: BeaconDemo.Finch},
       # Start Beacon sites
-      {Beacon, [sites: [Application.fetch_env!(:beacon, :demo)]]},
+      {Beacon, [sites: [Application.fetch_env!(:beacon, :demo), Application.fetch_env!(:beacon, :blog)]]},
       # Start the Endpoint (http/https)
       BeaconDemoWeb.Endpoint,
+      BeaconDemoWeb.BlogEndpoint,
       BeaconDemoWeb.DemoEndpoint,
       BeaconDemoWeb.ProxyEndpoint
     ]

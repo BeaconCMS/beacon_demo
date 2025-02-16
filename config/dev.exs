@@ -2,6 +2,14 @@ import Config
 secret_key_base = "ogFiGvuueVjyGqIxV6oodczyseofmEtAfskXV16XTsUcOSRpuvT7Xa1NsNBmPH55"
 
 config :beacon_demo,
+       BeaconDemoWeb.BlogEndpoint,
+       http: [ip: {127, 0, 0, 1}, port: 4586],
+       check_origin: false,
+       code_reloader: true,
+       debug_errors: true,
+       secret_key_base: secret_key_base
+
+config :beacon_demo,
        BeaconDemoWeb.DemoEndpoint,
        http: [ip: {127, 0, 0, 1}, port: 4941],
        check_origin: false,

@@ -1,5 +1,7 @@
 import Config
 
+config :beacon, blog: [site: :blog, repo: BeaconDemo.Repo, endpoint: BeaconDemoWeb.BlogEndpoint, router: BeaconDemoWeb.Router]
+
 config :beacon, :demo,
   site: :demo,
   repo: BeaconDemo.Repo,
@@ -76,6 +78,12 @@ if config_env() == :prod do
   config :beacon_demo, BeaconDemoWeb.DemoEndpoint,
     url: [host: host, port: 8506, scheme: "https"],
     http: [ip: {0, 0, 0, 0, 0, 0, 0, 0}, port: 4161],
+    secret_key_base: secret_key_base,
+    server: !!System.get_env("PHX_SERVER")
+
+  config :beacon_demo, BeaconDemoWeb.BlogEndpoint,
+    url: [host: host, port: 8629, scheme: "https"],
+    http: [ip: {0, 0, 0, 0, 0, 0, 0, 0}, port: 4586],
     secret_key_base: secret_key_base,
     server: !!System.get_env("PHX_SERVER")
 
