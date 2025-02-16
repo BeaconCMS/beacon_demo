@@ -20,16 +20,14 @@ config :beacon_demo,
        pubsub_server: BeaconDemo.PubSub,
        live_view: [signing_salt: signing_salt]
 
-config :beacon_demo, BeaconDemoWeb.ProxyEndpoint, adapter: Bandit.PhoenixAdapter, live_view: [signing_salt: signing_salt]
+config :beacon_demo, BeaconDemoWeb.ProxyEndpoint,
+  adapter: Bandit.PhoenixAdapter,
+  pubsub_server: BeaconDemo.PubSub,
+  live_view: [signing_salt: signing_salt]
 
 config :beacon_demo,
   ecto_repos: [BeaconDemo.Repo],
-  session_options: [
-    store: :cookie,
-    key: "_beacon_demo_key",
-    signing_salt: signing_salt,
-    same_site: "Lax"
-  ]
+  session_options: [store: :cookie, key: "_beacon_demo_key", signing_salt: signing_salt, same_site: "Lax"]
 
 # Configures the endpoint
 config :beacon_demo, BeaconDemoWeb.Endpoint,

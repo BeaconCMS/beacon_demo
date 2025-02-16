@@ -74,8 +74,8 @@ if config_env() == :prod do
     server: !!System.get_env("PHX_SERVER")
 
   config :beacon_demo, BeaconDemoWeb.DemoEndpoint,
-    url: [host: host, port: 8575, scheme: "https"],
-    http: [ip: {0, 0, 0, 0, 0, 0, 0, 0}, port: 4941],
+    url: [host: host, port: 8506, scheme: "https"],
+    http: [ip: {0, 0, 0, 0, 0, 0, 0, 0}, port: 4161],
     secret_key_base: secret_key_base,
     server: !!System.get_env("PHX_SERVER")
 
