@@ -1,8 +1,7 @@
 defmodule BeaconDemo.MixProject do
   use Mix.Project
 
-  @version "0.2.0-dev"
-  @dev? String.ends_with?(@version, "-dev") || System.get_env("BEACON_DEMO_DEV") in ["true", "1"]
+  @version "0.3.0"
 
   def project do
     [
@@ -105,7 +104,7 @@ defmodule BeaconDemo.MixProject do
       path = System.get_env("BEACON_PATH") ->
         {:beacon, path: path, override: true}
 
-      @dev? ->
+      String.ends_with?(@version, "-dev") ->
         {:beacon, github: "BeaconCMS/beacon", override: true}
 
       :else ->
@@ -118,7 +117,7 @@ defmodule BeaconDemo.MixProject do
       path = System.get_env("BEACON_LIVE_ADMIN_PATH") ->
         {:beacon_live_admin, path: path}
 
-      @dev? ->
+      String.ends_with?(@version, "-dev") ->
         {:beacon_live_admin, github: "BeaconCMS/beacon_live_admin"}
 
       :else ->
