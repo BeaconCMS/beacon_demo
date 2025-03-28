@@ -21,6 +21,11 @@ defmodule BeaconDemoWeb.Router do
     plug Beacon.LiveAdmin.Plug
   end
 
+  scope "/blog", alias: BeaconDemoWeb do
+    pipe_through [:browser, :beacon]
+    beacon_site "/", site: :blog
+  end
+
   scope "/admin" do
     pipe_through [:browser, :beacon_admin]
     beacon_live_admin "/"
